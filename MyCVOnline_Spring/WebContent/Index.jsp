@@ -10,7 +10,7 @@
 </head>
 <body>
  
-<% response.sendRedirect("/MyCVOnline_Spring/retreive/applicants"); %>
+<% response.sendRedirect("/MyCVOnline_Spring/Applicants/All-Applicants"); %>
 
 </body>
 </html>

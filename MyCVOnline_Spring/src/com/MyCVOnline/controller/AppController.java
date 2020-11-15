@@ -11,13 +11,14 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
-@RequestMapping("/retreive")
+@RequestMapping("/Applicants")
 @ComponentScan("com.MyCVOnline") 
 public class AppController {
 
@@ -28,17 +29,17 @@ public class AppController {
 	 MessageSource messageSource;
 
 	 // This method will list all existing employees.    
-	 	@RequestMapping("/applicants")
-	    public String listApplicants(ModelMap model) {
+	 	@RequestMapping(value = { "/All-Applicants" }, method = RequestMethod.GET)
+	    public String getAllApplicants(ModelMap model) {
 	  
 	        ArrayList<Applicant> applicants = applicant_service.retreiveApplicants();
 	        model.addAttribute("applicants", applicants);
 	        return "AllApplicants";
 	    }
 	      
-	    // This method will provide the medium to add a new employee.     
+	    // This method will provide the medium to add a new applicant.     
 	    @RequestMapping(value = { "/new" }, method = RequestMethod.GET)
-	    public String newEmployee(ModelMap model) {
+	    public String newApplicant(ModelMap model) {
 	        Applicant applicant = new Applicant();
 	        model.addAttribute("applicant", applicant);
 	        model.addAttribute("edit", false);
@@ -46,24 +47,24 @@ public class AppController {
 	    }
 	      
 	     // This method will be called on form submission, handling POST request for
-	     // saving employee in database. It also validates the user input     
+	     // saving an applicant in database. It also validates the user input     
 	    @RequestMapping(value = { "/new" }, method = RequestMethod.POST)
-	    public String saveEmployee(@Valid Applicant applicant, BindingResult result,
+	    public String saveApplicant(@Valid Applicant applicant, BindingResult result,
 	            ModelMap model) {
 	  
 	        if (result.hasErrors()) {
 	            return "registration";
 	        }
 	          
-	         // Preferred way to achieve uniqueness of field [ssn] should be implementing custom @Unique annotation 
-	         // and applying it on field [ssn] of Model class [Employee].Below mentioned peace of code [if block] is 
+	         // Preferred way to achieve uniqueness of field [ID] should be implementing custom @Unique annotation 
+	         // and applying it on field [ID] of Model class [Applicant].Below mentioned peace of code [if block] is 
 	          // to demonstrate that you can fill custom errors outside the validation
 	         // framework as well while still using internationalized messages.
 	           
 	       
 	        if(!applicant_service.isApplicantIDUnique(applicant.getApplicantID())){
-	            /*FieldError IDError =new FieldError("applicant","applicantID",messageSource.getMessage("non.unique.ssn", new String[]{applicant.getApplicantID()}));
-	            result.addError(IDError);*/
+	            FieldError IDError =new FieldError("applicant","applicantID",messageSource.getMessage("non.unique.ID", new String[]{applicant.getApplicantID()}, null));
+	            result.addError(IDError);
 	            return "registration";
 	        }
 	          
@@ -73,9 +74,9 @@ public class AppController {
 	        return "success";
 	    }
 	      
-	     // This method will provide the medium to update an existing employee.     
-	    @RequestMapping(value = { "/edit-{applicantID}-employee" }, method = RequestMethod.GET)
-	    public String editEmployee(@PathVariable String applicantID, ModelMap model) {
+	     // This method will provide the medium to update an existing applicant.     
+	    @RequestMapping(value = { "/edit-{applicantID}-applicant" }, method = RequestMethod.GET)
+	    public String editApplicant(@PathVariable String applicantID, ModelMap model) {
 	    	Applicant applicant = applicant_service.retreiveApplicant(applicantID);
 	        model.addAttribute("applicant", applicant);
 	        model.addAttribute("edit", true);
@@ -84,10 +85,10 @@ public class AppController {
 	      
 	    
 	     // This method will be called on form submission, handling POST request for
-	     // updating employee in database. It also validates the user input
+	     // updating applicant in database. It also validates the user input
 	     
-	    @RequestMapping(value = { "/edit-{applicantID}-employee" }, method = RequestMethod.POST)
-	    public String updateEmployee(@Valid Applicant applicant, BindingResult result,
+	    @RequestMapping(value = { "/edit-{applicantID}-applicant" }, method = RequestMethod.POST)
+	    public String updateApplicant(@Valid Applicant applicant, BindingResult result,
 	            ModelMap model, @PathVariable String applicantID) {
 	  
 	        if (result.hasErrors()) {
@@ -95,8 +96,8 @@ public class AppController {
 	        }
 	  
 	        if(!applicant_service.isApplicantIDUnique(applicantID)){
-	            /*FieldError ssnError =new FieldError("applicant","applicantID",messageSource.getMessage("non.unique.ssn", new String[]{applicant.getApplicantID()}));
-	            result.addError(ssnError);*/
+	        	FieldError IDError =new FieldError("applicant","applicantID",messageSource.getMessage("non.unique.ID", new String[]{applicant.getApplicantID()}, null));
+	            result.addError(IDError);
 	            return "registration";
 	        }
 	  
@@ -106,11 +107,11 @@ public class AppController {
 	        return "success";
 	    }
 	          
-	     // This method will delete an employee by it's SSN value.     
-	    @RequestMapping(value = { "/delete-{applicantID}-employee" }, method = RequestMethod.GET)
-	    public String deleteEmployee(@PathVariable String applicantID) {
+	     // This method will delete an applicant by it's ID value.     
+	    @RequestMapping(value = { "/delete-{applicantID}-applicant" }, method = RequestMethod.GET)
+	    public String deleteApplicant(@PathVariable String applicantID) {
 	    	applicant_service.deleteApplicant(applicantID);
-	        return "redirect:/list";
+	        return "redirect:/AllApplicants";
 	    }
 	 
 	 
