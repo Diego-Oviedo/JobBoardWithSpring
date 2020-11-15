@@ -1,6 +1,7 @@
 package com.MyCVOnline.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,9 +12,9 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 @Table(name = "APPLICANTS_EDUCATION")
@@ -31,13 +32,13 @@ public class ApplicantEducation implements Serializable{
 	@NotNull
 	@DateTimeFormat(pattern = "DD/MM/YYYY")
 	@Column(name = "START_DATE", nullable = false)
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
-	private String startDate;
+	@Type(type = "org.hibernate.type.LocalDateTimeType")
+	private LocalDateTime startDate;
 
 	@DateTimeFormat(pattern = "DD/MM/YYYY")
 	@Column(name = "END_DATE")
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
-	private String endDate;
+	@Type(type = "org.hibernate.type.LocalDateTimeType")
+	private LocalDateTime endDate;
 
 	@Column(name = "DESCRIPTION")
 	private String description;
@@ -56,7 +57,7 @@ public class ApplicantEducation implements Serializable{
 
 	}
 
-	public ApplicantEducation(String educationTitle, String schoolName, String startDate, String endDate,
+	public ApplicantEducation(String educationTitle, String schoolName, LocalDateTime startDate, LocalDateTime endDate,
 			String description, byte[] eduLogo, Applicant applicant) {
 		super();
 		this.educationTitle = educationTitle;
@@ -84,19 +85,19 @@ public class ApplicantEducation implements Serializable{
 		this.schoolName = schoolName;
 	}
 
-	public String getStartDate() {
+	public LocalDateTime getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
+	public void setStartDate(LocalDateTime startDate) {
 		this.startDate = startDate;
 	}
 
-	public String getEndDate() {
+	public LocalDateTime getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(String endDate) {
+	public void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
 	}
 

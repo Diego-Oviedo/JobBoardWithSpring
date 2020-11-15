@@ -1,6 +1,7 @@
 package com.MyCVOnline.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,13 +32,13 @@ public class ApplicantExperience implements Serializable{
 	@NotNull
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "START_DATE", nullable = false)
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
-	private String startDate;
+	@Type(type = "org.hibernate.type.LocalDateTimeTyp")
+	private LocalDateTime startDate;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "END_DATE")
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
-	private String endDate;
+	@Type(type = "org.hibernate.type.LocalDateTimeType")
+	private LocalDateTime endDate;
 
 	@Column(name = "DESCRIPTION")
 	private String description;
@@ -55,7 +56,7 @@ public class ApplicantExperience implements Serializable{
 		super();
 	}
 
-	public ApplicantExperience(String experienceTitle, String companyName, String startDate, String endDate,
+	public ApplicantExperience(String experienceTitle, String companyName, LocalDateTime startDate, LocalDateTime endDate,
 			String description, byte[] expLogo, Applicant applicant) {
 		super();
 		this.experienceTitle = experienceTitle;
@@ -83,19 +84,19 @@ public class ApplicantExperience implements Serializable{
 		this.companyName = companyName;
 	}
 
-	public String getStartDate() {
+	public LocalDateTime getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
+	public void setStartDate(LocalDateTime startDate) {
 		this.startDate = startDate;
 	}
 
-	public String getEndDate() {
+	public LocalDateTime getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(String endDate) {
+	public void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
 	}
 

@@ -62,6 +62,14 @@
 		    <version>5.4.2.Final</version>
 		</dependency>
 
+        <!-- Java 8 and Hibernate -->
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-java8</artifactId>
+			<version>5.4.2.Final</version>
+		</dependency>
+
  
         <!-- jsr303 validation -->
         <dependency>
@@ -79,15 +87,8 @@
 	        <scope>system</scope>
 	        <systemPath>/Users/diegooviedosantana/Google Drive/Proyectos/Java/Java DataBases/Documentation/DataBase/ojdbc6.jar</systemPath>
 	    </dependency>
- 
-        <!-- Joda-Time -->       
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>2.3</version>
-        </dependency>
          
- 
+        
         <!-- Servlet+JSP+JSTL -->
         <dependency>
             <groupId>javax.servlet</groupId>
