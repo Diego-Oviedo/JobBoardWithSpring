@@ -11,15 +11,18 @@ public class AppInitializer implements WebApplicationInitializer{
 
 	public void onStartup(ServletContext container) throws ServletException {
 		  
-        AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-        ctx.register(AppConfiguration.class);
-        ctx.setServletContext(container);
-  
-        ServletRegistration.Dynamic servlet = container.addServlet(
-                "dispatcher", new DispatcherServlet(ctx));
+		// Load Spring web application configuration
+        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+        context.register(AppConfiguration.class);
+        context.setServletContext(container);
+        
+        
+        // Create and register the DispatcherServlet
+        ServletRegistration.Dynamic servlet = container.addServlet("dispatcher", new DispatcherServlet(context));
   
         servlet.setLoadOnStartup(1);
-        servlet.addMapping("/");
+        servlet.addMapping("/MyCVOnline_Spring/*");
+        
     }
 
 }
