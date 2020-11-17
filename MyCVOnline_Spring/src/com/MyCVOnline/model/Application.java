@@ -33,10 +33,8 @@ public class Application  implements Serializable{
 			@Parameter(name = StringSequenceIdentifier.NUMBER_FORMAT_PARAMETER, value = "%06d") })
 	private String applicationNumber;
 
-	@NotNull
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+
 	@Column(name = "APPLICATION_DATE", nullable = false)
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
 	private String applicationDate;
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })

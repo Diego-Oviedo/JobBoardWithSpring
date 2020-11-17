@@ -11,10 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Type;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "APPLICANTS_EXPERIENCES")
@@ -29,15 +26,10 @@ public class ApplicantExperience implements Serializable{
 	@Column(name = "COMPANY_NAME")
 	private String companyName;
 
-	@NotNull
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "START_DATE", nullable = false)
-	@Type(type = "org.hibernate.type.LocalDateTimeTyp")
 	private LocalDateTime startDate;
 
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "END_DATE")
-	@Type(type = "org.hibernate.type.LocalDateTimeType")
 	private LocalDateTime endDate;
 
 	@Column(name = "DESCRIPTION")
