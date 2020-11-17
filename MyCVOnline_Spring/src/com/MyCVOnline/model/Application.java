@@ -32,8 +32,10 @@ public class Application  implements Serializable{
 			@Parameter(name = StringSequenceIdentifier.VALUE_PREFIX_PARAMETER, value = "A"),
 			@Parameter(name = StringSequenceIdentifier.NUMBER_FORMAT_PARAMETER, value = "%06d") })
 	private String applicationNumber;
-
-
+	
+	
+	@DateTimeFormat(pattern = "DD/MM/YYYY")
+	@Type(type = "org.hibernate.type.LocalDateTimeType")
 	@Column(name = "APPLICATION_DATE", nullable = false)
 	private String applicationDate;
 

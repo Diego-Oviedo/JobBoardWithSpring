@@ -12,6 +12,9 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 @Table(name = "APPLICANTS_EDUCATION")
@@ -25,10 +28,14 @@ public class ApplicantEducation implements Serializable{
 
 	@Column(name = "SCHOOL_NAME")
 	private String schoolName;
-
+	
+	@DateTimeFormat(pattern = "DD/MM/YYYY")
+	@Type(type = "org.hibernate.type.LocalDateTimeType")
 	@Column(name = "START_DATE", nullable = false)
 	private LocalDateTime startDate;
 
+	@DateTimeFormat(pattern = "DD/MM/YYYY")
+	@Type(type = "org.hibernate.type.LocalDateTimeType")
 	@Column(name = "END_DATE")
 	private LocalDateTime endDate;
 

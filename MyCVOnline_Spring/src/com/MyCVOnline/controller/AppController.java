@@ -34,6 +34,7 @@ public class AppController {
 	  
 	        ArrayList<Applicant> applicants = applicant_service.retreiveApplicants();
 	        model.addAttribute("applicants", applicants);
+	        System.out.println("Works untill contoller call");
 	        return "AllApplicants";
 	    }
 	      
