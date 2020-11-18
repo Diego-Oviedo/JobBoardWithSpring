@@ -19,7 +19,7 @@ public class AppConfiguration {
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("MyCVOnline_Spring/WebContent/WEB-INF/views/");
+        viewResolver.setPrefix("/WEB-INF/views/");
         viewResolver.setSuffix(".jsp");
         return viewResolver;
     }

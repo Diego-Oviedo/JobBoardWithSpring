@@ -24,8 +24,8 @@ Applicants:  <br>
 
 	<c:forEach var="applicant" items="${applicants}">
 	<tbody>
-		<td>${applicant.nombre}</td>
-		<td>${applicant.appellido} ${applicant.lastName}</td>
+		<td>${applicant.username}</td>
+		<td>${applicant.firstName} ${applicant.lastName}</td>
 		<td>${applicant.profession}</td>
 	
 	
