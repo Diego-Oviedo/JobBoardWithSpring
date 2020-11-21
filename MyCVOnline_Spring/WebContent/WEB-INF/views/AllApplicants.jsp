@@ -27,7 +27,7 @@ Applicants:  <br>
 		<td>${applicant.username}</td>
 		<td>${applicant.firstName} ${applicant.lastName}</td>
 		<td>${applicant.profession}</td>
-	
+		<td><img width="200" alt="No picture in record" src="/All-Applicants_Pictures?applicantID=${applicant.applicantID}"/>"/></td>
 	
 	</tbody>
 	</c:forEach>

@@ -106,6 +106,8 @@ public class ApplicantDAOImpl extends AbstractDAO<Applicant> implements Applican
 
 	@Transactional
 	public void displayApplicantProfilePicture(String applicantID, HttpServletResponse response) {
+		System.out.println("Works when calling dao method \n");
+		
 		InputStream in = null; 
 		OutputStream out = null;
 		BufferedInputStream bufferIN = null;
@@ -141,6 +143,8 @@ public class ApplicantDAOImpl extends AbstractDAO<Applicant> implements Applican
 			}
 
 			getSession().close();
+			
+			System.out.println("Works when calling to the end of the method \n");
 
 		} catch (Exception e) {
 			e.printStackTrace();
