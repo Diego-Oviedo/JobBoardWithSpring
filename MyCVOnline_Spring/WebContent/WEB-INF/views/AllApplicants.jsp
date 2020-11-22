@@ -5,7 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Applicant List</title>
+	<style>
+        tr:first-child{
+            font-weight: bold;
+            background-color: #C6C9C4;
+        }
+    </style>
+
+<title>Applicant | Applicant List</title>
 </head>
 <body>
 
@@ -32,8 +39,9 @@ Applicants:  <br>
 	</tbody>
 	</c:forEach>
 
-
 </table>
+
+	<a href="<c:url value='New-Applicant' />">Add New Employee</a>
 
 </body>
 </html>

@@ -65,6 +65,9 @@ public class ApplicantController {
 	    // This method will provide the medium to add a new applicant.     
 	    @RequestMapping(value = { "/New-Applicant" }, method = RequestMethod.GET)
 	    public String newApplicant(ModelMap model) {
+	    	
+	    	System.out.println("Works when calling controller 2 \n");
+	    	
 	        Applicant applicant = new Applicant();
 	        model.addAttribute("applicant", applicant);
 	        model.addAttribute("edit", false);
@@ -76,22 +79,17 @@ public class ApplicantController {
 	    @RequestMapping(value = { "/New-Applicant" }, method = RequestMethod.POST)
 	    public String saveApplicant(@Valid Applicant applicant, BindingResult result,
 	            ModelMap model) {
-	  
+	    	System.out.println("Works when calling controller 1 \n");
 	        if (result.hasErrors()) {
 	            return "registration";
-	        }
-	          
-	         // Preferred way to achieve uniqueness of field [ID] should be implementing custom @Unique annotation 
-	         // and applying it on field [ID] of Model class [Applicant].Below mentioned peace of code [if block] is 
-	          // to demonstrate that you can fill custom errors outside the validation
-	         // framework as well while still using internationalized messages.
-	           
-	       
+	            }
+	        
 	        if(!applicant_service.isApplicantIDUnique(applicant.getApplicantID())){
+	        	
 	            FieldError IDError =new FieldError("applicant","applicantID",messageSource.getMessage("non.unique.ID", new String[]{applicant.getApplicantID()}, null));
 	            result.addError(IDError);
 	            return "registration";
-	        }
+	        	}
 	          
 	        applicant_service.insertApplicant(applicant);
 	  
