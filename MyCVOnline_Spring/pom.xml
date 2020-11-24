@@ -5,7 +5,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <url>http://maven.apache.org</url>
-  
+     
  <build> 
  <plugins>
       <plugin>
@@ -25,7 +25,7 @@
         </configuration>
       </plugin>
     </plugins>
-  </build>
+  </build> 
   
   <dependencies>
   <!-- Spring -->

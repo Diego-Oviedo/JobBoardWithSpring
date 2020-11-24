@@ -19,9 +19,9 @@ public class AppInitializer implements WebApplicationInitializer{
         
         // Create and register the DispatcherServlet
         ServletRegistration.Dynamic servlet = container.addServlet("dispatcher", new DispatcherServlet(context));
-  
+   
         servlet.setLoadOnStartup(1);
-        servlet.addMapping("/MyCVOnline_Spring/*");
+        servlet.addMapping("/*");
         
     }
 

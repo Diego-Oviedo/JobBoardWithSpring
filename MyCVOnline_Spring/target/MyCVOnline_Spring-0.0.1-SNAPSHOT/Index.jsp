@@ -10,7 +10,7 @@
 </head>
 <body>
  
-<% response.sendRedirect("/Applicants/All-Applicants"); %>
+<% response.sendRedirect("Applicants/All-Applicants"); %>
 
 </body>
 </html>

@@ -5,7 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Applicant List</title>
+	<style>
+        tr:first-child{
+            font-weight: bold;
+            background-color: #C6C9C4;
+        }
+    </style>
+
+<title>Applicant | Applicant List</title>
 </head>
 <body>
 
@@ -24,16 +31,17 @@ Applicants:  <br>
 
 	<c:forEach var="applicant" items="${applicants}">
 	<tbody>
-		<td>${applicant.nombre}</td>
-		<td>${applicant.appellido} ${applicant.lastName}</td>
+		<td>${applicant.username}</td>
+		<td>${applicant.firstName} ${applicant.lastName}</td>
 		<td>${applicant.profession}</td>
-	
+		<td><img width="200" alt="No picture in record" src="/All-Applicants_Pictures?applicantID=${applicant.applicantID}"/>"/></td>
 	
 	</tbody>
 	</c:forEach>
 
-
 </table>
+
+	<a href="<c:url value='New-Applicant' />">Add New Employee</a>
 
 </body>
 </html>
