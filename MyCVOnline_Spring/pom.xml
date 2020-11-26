@@ -79,14 +79,22 @@
         </dependency>
 
         
-        <!-- ORACLE -->
+        <!-- ORACLE 
        <dependency>
 	        <groupId>oracle</groupId>
 	        <artifactId>ojdbc</artifactId>
 	        <version>11g</version>
 	        <scope>system</scope>
 	        <systemPath>/Users/diegooviedosantana/Google Drive/Proyectos/Java/Java DataBases/Documentation/DataBase/ojdbc6.jar</systemPath>
-	    </dependency>
+	    </dependency> -->
+
+        <!-- MySQL -->
+       <dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>8.0.22</version>
+		</dependency>
+
          
         
         <!-- Servlet+JSP+JSTL -->
