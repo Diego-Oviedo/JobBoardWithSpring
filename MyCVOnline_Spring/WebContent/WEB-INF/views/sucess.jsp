@@ -12,7 +12,7 @@
 	 message : ${success}
     <br/>
     <br/>
-    Go back to <a href="<c:url value='/All-Applicants' />">List of All Applicants</a>
+    Go back to <a href="${pageContext.request.contextPath}/Applicants/All-Applicants">List of All Applicants</a>
 
 </body>
 </html>

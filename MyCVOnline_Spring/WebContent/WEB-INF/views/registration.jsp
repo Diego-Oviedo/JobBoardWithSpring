@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,7 +70,7 @@
     </form:form>
     <br/>
     <br/>
-    Go back to <a href="<c:url value='/All-Applicants' />">List of All Applicants</a>
+    Go back to <a href="${pageContext.request.contextPath}/Applicants/All-Applicants">List of All Applicants</a>
 
 </body>
 </html>

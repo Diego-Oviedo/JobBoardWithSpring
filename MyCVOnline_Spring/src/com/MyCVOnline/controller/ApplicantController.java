@@ -66,12 +66,12 @@ public class ApplicantController {
 	    @RequestMapping(value = { "/New-Applicant" }, method = RequestMethod.GET)
 	    public String newApplicant(ModelMap model) {
 	    	
-	    	System.out.println("Works when calling controller 2 \n");
+	    	
 	    	
 	        Applicant applicant = new Applicant();
 	        model.addAttribute("applicant", applicant);
 	        model.addAttribute("edit", false);
-	        return "registration";
+	        return "registration"; 
 	    }
 	      
 	     // This method will be called on form submission, handling POST request for
