@@ -27,7 +27,7 @@ public class CompanyPosition implements Serializable{
 	@Id
 	@Column(name = "POSITION_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Position_SEQ")
-	@GenericGenerator(name = "Position_SEQ", strategy = "com.MyCVOnline.configuration.StringSequenceIdentifier", parameters = {
+	@GenericGenerator(name = "Position_SEQ", strategy = "com.MyCVOnline.configuration.IDgenerators.GenericIDgenerator", parameters = {
 			@Parameter(name = GenericIDgenerator.INCREMENT_PARAM, value = "1"),
 			@Parameter(name = GenericIDgenerator.VALUE_PREFIX_PARAMETER, value = "PSTN"),
 			@Parameter(name = GenericIDgenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })

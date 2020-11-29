@@ -28,7 +28,7 @@ public class Application  implements Serializable{
 	@Id
 	@Column(name = "APPLICATION_NUMBER")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Applicantion_SEQ")
-	@GenericGenerator(name = "Applicantion_SEQ", strategy = "com.MyCVOnline.configuration.StringSequenceIdentifier", parameters = {
+	@GenericGenerator(name = "Applicantion_SEQ", strategy = "com.MyCVOnline.configuration.IDgenerators.GenericIDgenerator", parameters = {
 			@Parameter(name = GenericIDgenerator.INCREMENT_PARAM, value = "1"),
 			@Parameter(name = GenericIDgenerator.VALUE_PREFIX_PARAMETER, value = "A"),
 			@Parameter(name = GenericIDgenerator.NUMBER_FORMAT_PARAMETER, value = "%06d") })
