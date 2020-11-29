@@ -16,8 +16,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+
+import com.MyCVOnline.configuration.IDgenerators.GenericIDgenerator;
+
 import javax.validation.constraints.NotNull;
-import com.MyCVOnline.configuration.StringSequenceIdentifier;
 
 @Entity
 @Table(name = "APPLICANTS")
@@ -28,10 +30,10 @@ public class Applicant implements Serializable{
 
 	@Id
 	@Column(name = "APPLICANT_ID")
-	@GenericGenerator(name = "Applicant_SEQ", strategy = "com.MyCVOnline.configuration.StringSequenceIdentifier", parameters = {
-			@Parameter(name = StringSequenceIdentifier.INCREMENT_PARAM, value = "1"),
-			@Parameter(name = StringSequenceIdentifier.VALUE_PREFIX_PARAMETER, value = "APCNT"),
-			@Parameter(name = StringSequenceIdentifier.NUMBER_FORMAT_PARAMETER, value = "%05d") })
+	@GenericGenerator(name = "Applicant_SEQ", strategy = "com.MyCVOnline.configuration.IDgenerators.GenericIDgenerator", parameters = {
+			@Parameter(name = GenericIDgenerator.INCREMENT_PARAM, value = "1"),
+			@Parameter(name = GenericIDgenerator.VALUE_PREFIX_PARAMETER, value = "APCNT"),
+			@Parameter(name = GenericIDgenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Applicant_SEQ")
 	private String applicantID;
 	

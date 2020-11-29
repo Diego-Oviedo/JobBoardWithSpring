@@ -15,7 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-import com.MyCVOnline.configuration.StringSequenceIdentifier;
+
+import com.MyCVOnline.configuration.IDgenerators.GenericIDgenerator;
 
 @Entity
 @Table(name = "COMPANIES")
@@ -27,9 +28,9 @@ public class Company implements Serializable{
 	@Column(name = "COMPANY_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Company_SEQ")
 	@GenericGenerator(name = "Company_SEQ", strategy = "com.MyCVOnline.configuration.StringSequenceIdentifier", parameters = {
-			@Parameter(name = StringSequenceIdentifier.INCREMENT_PARAM, value = "1"),
-			@Parameter(name = StringSequenceIdentifier.VALUE_PREFIX_PARAMETER, value = "CPNY"),
-			@Parameter(name = StringSequenceIdentifier.NUMBER_FORMAT_PARAMETER, value = "%05d") })
+			@Parameter(name = GenericIDgenerator.INCREMENT_PARAM, value = "1"),
+			@Parameter(name = GenericIDgenerator.VALUE_PREFIX_PARAMETER, value = "CPNY"),
+			@Parameter(name = GenericIDgenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
 	private String companyID;
 
 	@Column(name = "COMPANY_NAME")

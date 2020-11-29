@@ -1,4 +1,4 @@
-package com.MyCVOnline.configuration;
+package com.MyCVOnline.configuration.IDgenerators;
 
 import java.io.Serializable;
 import java.util.Properties;
@@ -14,7 +14,7 @@ import org.hibernate.service.ServiceRegistry;
 import org.hibernate.type.LongType;
 import org.hibernate.type.Type;
 
-public class StringSequenceIdentifier extends SequenceStyleGenerator {
+public class GenericIDgenerator extends SequenceStyleGenerator {
 
 	public static final String VALUE_PREFIX_PARAMETER = "valuePrefix";
 	public static final String VALUE_PREFIX_DEFAULT = "";
