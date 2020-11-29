@@ -35,6 +35,8 @@ public class ApplicantTechSkill implements Serializable{
 		this.skillName = skillName;
 	}
 
+	
+
 	public Applicant getApplicant() {
 		return applicant;
 	}
@@ -49,6 +51,10 @@ public class ApplicantTechSkill implements Serializable{
 
 	public void setSkillName(String skillName) {
 		this.skillName = skillName;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override

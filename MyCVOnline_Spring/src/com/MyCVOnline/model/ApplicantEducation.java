@@ -68,6 +68,8 @@ public class ApplicantEducation implements Serializable{
 		this.applicant = applicant;
 	}
 
+	
+
 	public String getEducationTitle() {
 		return educationTitle;
 	}
@@ -122,6 +124,10 @@ public class ApplicantEducation implements Serializable{
 
 	public void setApplicant(Applicant applicant) {
 		this.applicant = applicant;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override

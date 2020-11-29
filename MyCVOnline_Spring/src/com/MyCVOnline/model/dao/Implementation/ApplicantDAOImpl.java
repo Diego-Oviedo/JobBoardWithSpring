@@ -22,7 +22,7 @@ public class ApplicantDAOImpl extends AbstractDAO<Applicant> implements Applican
 	@Transactional
 	public void insertApplicant(Applicant applicant) {
 
-		persist(applicant);
+		save(applicant);
 
 	}
 

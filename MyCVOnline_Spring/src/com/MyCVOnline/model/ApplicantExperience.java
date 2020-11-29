@@ -67,6 +67,8 @@ public class ApplicantExperience implements Serializable{
 		this.applicant = applicant;
 	}
 
+	
+
 	public String getExperienceTitle() {
 		return experienceTitle;
 	}
@@ -121,6 +123,10 @@ public class ApplicantExperience implements Serializable{
 
 	public void setApplicant(Applicant applicant) {
 		this.applicant = applicant;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override

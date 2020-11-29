@@ -28,11 +28,11 @@ public class Applicant implements Serializable{
 
 	@Id
 	@Column(name = "APPLICANT_ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Applicant_SEQ")
 	@GenericGenerator(name = "Applicant_SEQ", strategy = "com.MyCVOnline.configuration.StringSequenceIdentifier", parameters = {
 			@Parameter(name = StringSequenceIdentifier.INCREMENT_PARAM, value = "1"),
 			@Parameter(name = StringSequenceIdentifier.VALUE_PREFIX_PARAMETER, value = "APCNT"),
 			@Parameter(name = StringSequenceIdentifier.NUMBER_FORMAT_PARAMETER, value = "%05d") })
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Applicant_SEQ")
 	private String applicantID;
 	
 	@NotNull
@@ -104,165 +104,294 @@ public class Applicant implements Serializable{
 	}
 
 
+
+
 	public String getApplicantID() {
 		return applicantID;
 	}
+
+
+
 
 	public void setApplicantID(String applicantID) {
 		this.applicantID = applicantID;
 	}
 
+
+
+
 	public String getUsername() {
 		return username;
 	}
+
+
+
 
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
+
+
+
 	public String getPassword() {
 		return password;
 	}
+
+
+
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+
+
+
 	public String getFirstName() {
 		return firstName;
 	}
+
+
+
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
+
+
+
 	public String getLastName() {
 		return lastName;
 	}
+
+
+
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
+
+
+
 	public String getProfession() {
 		return profession;
 	}
+
+
+
 
 	public void setProfession(String profession) {
 		this.profession = profession;
 	}
 
+
+
+
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
+
+
+
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
+
+
+
 	public String getEmail() {
 		return email;
 	}
+
+
+
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+
+
+
 	public String getStreetAddress() {
 		return streetAddress;
 	}
+
+
+
 
 	public void setStreetAddress(String streetAddress) {
 		this.streetAddress = streetAddress;
 	}
 
+
+
+
 	public String getPostalCode() {
 		return postalCode;
 	}
+
+
+
 
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
 
+
+
+
 	public String getCity() {
 		return city;
 	}
+
+
+
 
 	public void setCity(String city) {
 		this.city = city;
 	}
 
+
+
+
 	public String getProvince() {
 		return province;
 	}
+
+
+
 
 	public void setProvince(String province) {
 		this.province = province;
 	}
 
+
+
+
 	public String getCountry() {
 		return country;
 	}
+
+
+
 
 	public void setCountry(String country) {
 		this.country = country;
 	}
 
+
+
+
 	public String getAboutYou() {
 		return aboutYou;
 	}
+
+
+
 
 	public void setAboutYou(String aboutYou) {
 		this.aboutYou = aboutYou;
 	}
 
+
+
+
 	public byte[] getProfilePicture() {
 		return profilePicture;
 	}
+
+
+
 
 	public void setProfilePicture(byte[] profilePicture) {
 		this.profilePicture = profilePicture;
 	}
 
+
+
+
 	public List<ApplicantEducation> getEducations() {
 		return educations;
 	}
+
+
+
 
 	public void setEducations(List<ApplicantEducation> educations) {
 		this.educations = educations;
 	}
 
+
+
+
 	public List<ApplicantExperience> getExperiences() {
 		return experiences;
 	}
+
+
+
 
 	public void setExperiences(List<ApplicantExperience> experiences) {
 		this.experiences = experiences;
 	}
 
+
+
+
 	public List<ApplicantOtherSkill> getOtherSkills() {
 		return otherSkills;
 	}
+
+
+
 
 	public void setOtherSkills(List<ApplicantOtherSkill> otherSkills) {
 		this.otherSkills = otherSkills;
 	}
 
+
+
+
 	public List<ApplicantTechSkill> getTechSkills() {
 		return techSkills;
 	}
+
+
+
 
 	public void setTechSkills(List<ApplicantTechSkill> techSkills) {
 		this.techSkills = techSkills;
 	}
 
+
+
+
 	public List<Application> getApplications() {
 		return applications;
 	}
 
+
+
+
 	public void setApplications(List<Application> applications) {
 		this.applications = applications;
 	}
+
+
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+
 
 	public void addEducation(ApplicantEducation education) {
 
