@@ -30,11 +30,11 @@ public class Applicant implements Serializable{
 
 	@Id
 	@Column(name = "APPLICANT_ID")
-	@GenericGenerator(name = "Applicant_SEQ", strategy = "com.MyCVOnline.configuration.IDgenerators.GenericIDgenerator", parameters = {
+	@GenericGenerator(name = "ID_SEQ", strategy = "com.MyCVOnline.configuration.IDgenerators.GenericIDgenerator", parameters = {
 			@Parameter(name = GenericIDgenerator.INCREMENT_PARAM, value = "1"),
 			@Parameter(name = GenericIDgenerator.VALUE_PREFIX_PARAMETER, value = "APCNT"),
-			@Parameter(name = GenericIDgenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Applicant_SEQ")
+			@Parameter(name = GenericIDgenerator.NUMBER_FORMAT_PARAMETER, value = "%03d") })
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQ")
 	private String applicantID;
 	
 	@NotNull
@@ -106,21 +106,43 @@ public class Applicant implements Serializable{
 	}
 
 
+	public Applicant(String applicantID, String username, String password, String firstName, String lastName,
+			String profession, String phoneNumber, String email, String streetAddress, String postalCode, String city,
+			String province, String country, String aboutYou, byte[] profilePicture,
+			List<ApplicantEducation> educations, List<ApplicantExperience> experiences,
+			List<ApplicantOtherSkill> otherSkills, List<ApplicantTechSkill> techSkills,
+			List<Application> applications) {
+		super();
+		this.applicantID = applicantID;
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.profession = profession;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.streetAddress = streetAddress;
+		this.postalCode = postalCode;
+		this.city = city;
+		this.province = province;
+		this.country = country;
+		this.aboutYou = aboutYou;
+		this.profilePicture = profilePicture;
+		this.educations = educations;
+		this.experiences = experiences;
+		this.otherSkills = otherSkills;
+		this.techSkills = techSkills;
+		this.applications = applications;
+	}
 
 
 	public String getApplicantID() {
 		return applicantID;
 	}
 
-
-
-
 	public void setApplicantID(String applicantID) {
 		this.applicantID = applicantID;
 	}
-
-
-
 
 	public String getUsername() {
 		return username;

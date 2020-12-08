@@ -24,7 +24,7 @@ public class GenericIDgenerator extends SequenceStyleGenerator {
 	public static final String NUMBER_FORMAT_DEFAULT = "%d";
 	private String numberFormat;
 
-	public Serializable generate(SharedSessionContract session, Object object) throws HibernateException {
+	public String generate(SharedSessionContract session, Object object) throws HibernateException {
 		return valuePrefix + String.format(numberFormat, super.generate((SessionImplementor) session, object));
 	}
 

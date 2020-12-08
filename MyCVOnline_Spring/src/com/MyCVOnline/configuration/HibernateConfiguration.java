@@ -33,16 +33,16 @@ public class HibernateConfiguration {
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/MyCVOnline");
-		dataSource.setUsername("root");
-		dataSource.setPassword("system123");
+		dataSource.setDriverClassName("oracle.jdbc.OracleDriver");
+		dataSource.setUrl("jdbc:oracle:thin:@//localhost:1521/xe");
+		dataSource.setUsername("MyCVOnline");
+		dataSource.setPassword("curriculum123");
 		return dataSource;
 	}
 
 	private Properties hibernateProperties() {
 		Properties properties = new Properties();
-		properties.setProperty("hibernate.dialect","org.hibernate.dialect.MySQL5InnoDBDialect");
+		properties.setProperty("hibernate.dialect","org.hibernate.dialect.Oracle10gDialect");
 		properties.setProperty("hibernate.show_sql","true");
 		properties.setProperty("hibernate.format_sql","true");
 		return properties;
