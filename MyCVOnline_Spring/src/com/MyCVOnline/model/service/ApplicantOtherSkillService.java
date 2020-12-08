@@ -5,7 +5,7 @@ import com.MyCVOnline.model.*;
 
 public interface ApplicantOtherSkillService {
 
-	public void insertApplicantOtherSkill(ApplicantOtherSkill otherSkill);
+	public void insertApplicantOtherSkill(Applicant applicant,ApplicantOtherSkill otherSkill);
 
 	public void deleteApplicantOtherSkill(String applicantID, String skillName);
 

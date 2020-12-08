@@ -7,16 +7,10 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-
-import com.MyCVOnline.configuration.IDgenerators.GenericIDgenerator;
 
 @Entity
 @Table(name = "COMPANIES")
@@ -26,11 +20,7 @@ public class Company implements Serializable{
 
 	@Id
 	@Column(name = "COMPANY_ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Company_SEQ")
-	@GenericGenerator(name = "Company_SEQ", strategy = "com.MyCVOnline.configuration.IDgenerators.GenericIDgenerator", parameters = {
-			@Parameter(name = GenericIDgenerator.INCREMENT_PARAM, value = "1"),
-			@Parameter(name = GenericIDgenerator.VALUE_PREFIX_PARAMETER, value = "CPNY"),
-			@Parameter(name = GenericIDgenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private String companyID;
 
 	@Column(name = "COMPANY_NAME")

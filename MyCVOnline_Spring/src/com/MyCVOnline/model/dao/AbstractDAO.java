@@ -26,7 +26,7 @@ public abstract class AbstractDAO<T> {
 	}
 
 	public T getByID(String key) {
-		return (T) getSession().get(persistentClass, (Serializable) key);
+		return (T) getSession().find(persistentClass, (Serializable) key);
 	}
 
 	public void save(T entity) {

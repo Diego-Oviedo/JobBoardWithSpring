@@ -6,11 +6,11 @@ import com.MyCVOnline.model.*;
 
 public interface ApplicantExperienceService {
 
-	public void insertApplicantExperience(ApplicantExperience experience);
+	public void insertApplicantExperience(Applicant applicant,ApplicantExperience experience);
 
 	public void deleteApplicantExperience(String applicantID, String experienceTitle);
 
-	public void retreiveApplicantExperience(String applicantID, String educationTitle);
+	public void retreiveApplicantExperience(String applicantID, String experienceTitle);
 
 	public ArrayList<ApplicantExperience> retreiveApplicantExperiencesByID(String applicantID);
 

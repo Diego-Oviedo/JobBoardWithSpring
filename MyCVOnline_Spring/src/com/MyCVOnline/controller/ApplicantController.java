@@ -79,7 +79,7 @@ public class ApplicantController {
 	    @RequestMapping(value = { "/New-Applicant" }, method = RequestMethod.POST)
 	    public String saveApplicant(@Valid Applicant applicant, BindingResult result,
 	            ModelMap model) {
-	    	System.out.println("Works when calling controller 1 \n");
+	    	
 	        if (result.hasErrors()) {
 	            return "registration";
 	            }

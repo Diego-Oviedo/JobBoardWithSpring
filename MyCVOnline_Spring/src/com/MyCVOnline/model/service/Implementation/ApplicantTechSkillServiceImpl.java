@@ -2,6 +2,7 @@ package com.MyCVOnline.model.service.Implementation;
 
 import java.util.ArrayList;
 
+import com.MyCVOnline.model.Applicant;
 import com.MyCVOnline.model.ApplicantTechSkill;
 import com.MyCVOnline.model.dao.ApplicantTechSkillDAO;
 import com.MyCVOnline.model.service.ApplicantTechSkillService;
@@ -11,9 +12,9 @@ public class ApplicantTechSkillServiceImpl implements ApplicantTechSkillService 
 	ApplicantTechSkillDAO dao;
 
 	@Override
-	public void insertApplicantTechSkill(ApplicantTechSkill techSkill) {
+	public void insertApplicantTechSkill(Applicant applicant,ApplicantTechSkill techSkill) {
 		// TODO Auto-generated method stub
-		dao.insertApplicantTechSkill(techSkill);
+		dao.insertApplicantTechSkill(applicant,techSkill);
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import com.MyCVOnline.model.*;
 
 public interface ApplicantEducationService {
 
-	public void insertApplicantEducation(ApplicantEducation education);
+	public void insertApplicantEducation(Applicant applicant,ApplicantEducation education);
 
 	public void deleteApplicantEducation(String applicantID, String educationTitle);
 

@@ -22,6 +22,55 @@ public class ApplicantDAOImpl extends AbstractDAO<Applicant> implements Applican
 	@Transactional
 	public void insertApplicant(Applicant applicant) {
 
+		final String PREFIX = "APCNT"; 
+		int APCNT_number = retreiveApplicants().size()+1;
+		String digits = null ;
+		String ID  = null;
+		
+		
+		if (APCNT_number <= 9) {
+			
+			digits = "0000";
+			
+			ID = PREFIX + digits + APCNT_number;
+			
+			applicant.setApplicantID(ID);
+			
+		}else if (APCNT_number <= 99) {
+			
+			digits = "000";
+			
+			ID = PREFIX + digits + APCNT_number;
+			
+			applicant.setApplicantID(ID);
+			
+		}else if (APCNT_number <= 999) {
+			
+			digits = "00";
+			
+			ID = PREFIX + digits + APCNT_number;
+			
+			applicant.setApplicantID(ID);
+			
+		}else if (APCNT_number <= 9999) {
+			
+			digits = "0";
+			
+			ID = PREFIX + digits + APCNT_number;
+			
+			applicant.setApplicantID(ID);
+			
+			
+		}else if (APCNT_number >= 10000) {
+			
+			
+			ID = PREFIX + APCNT_number;
+			
+			applicant.setApplicantID(ID);
+			
+		}
+		
+		
 		save(applicant);
 
 	}

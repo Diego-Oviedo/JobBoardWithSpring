@@ -41,7 +41,7 @@ Applicants:  <br>
 
 </table>
 
-	<a href="<c:url value='New-Applicant' />">Add New Employee</a>
+	<a href="<c:url value='New-Applicant' />">Add New Applicant</a>
 
 </body>
 </html>

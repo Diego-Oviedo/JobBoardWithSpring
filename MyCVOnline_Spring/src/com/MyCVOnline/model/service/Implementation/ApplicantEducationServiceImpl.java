@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.MyCVOnline.model.Applicant;
 import com.MyCVOnline.model.ApplicantEducation;
 import com.MyCVOnline.model.dao.ApplicantEducationDAO;
 import com.MyCVOnline.model.service.ApplicantEducationService;
@@ -15,9 +17,9 @@ public class ApplicantEducationServiceImpl implements ApplicantEducationService 
 	private ApplicantEducationDAO dao;
 
 	@Override
-	public void insertApplicantEducation(ApplicantEducation education) {
+	public void insertApplicantEducation(Applicant applicant,ApplicantEducation education) {
 		// TODO Auto-generated method stub
-		dao.insertApplicantEducation(education);
+		dao.insertApplicantEducation(applicant,education);
 	}
 
 	@Override

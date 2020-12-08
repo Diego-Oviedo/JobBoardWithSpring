@@ -14,7 +14,7 @@ public interface ApplicationDAO {
 
 	public ArrayList<Application> retreiveApplications();
 
-	public void updateApplication(Application applicationNumber);
+	public void updateApplication(Application application);
 
 	public ArrayList<Application> retreiveApplicationsByApplicantID(String applicantID);
 

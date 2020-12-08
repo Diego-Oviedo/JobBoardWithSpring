@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.MyCVOnline.model.Applicant;
 import com.MyCVOnline.model.ApplicantEducation;
 
 public interface ApplicantEducationDAO {
 
-	public void insertApplicantEducation(ApplicantEducation education);
+	public void insertApplicantEducation(Applicant applicant,ApplicantEducation education);
 
 	public void deleteApplicantEducation(String applicantID, String educationTitle);
 

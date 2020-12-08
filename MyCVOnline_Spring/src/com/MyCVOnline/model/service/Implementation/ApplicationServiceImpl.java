@@ -24,9 +24,9 @@ public class ApplicationServiceImpl implements ApplicationService {
 
 
 	@Override
-	public Application retreiveApplication(String applicationNumber) {
+	public Application retreiveApplication(String application) {
 		// TODO Auto-generated method stub
-		return dao.retreiveApplication(applicationNumber);
+		return dao.retreiveApplication(application);
 	}
 
 	@Override

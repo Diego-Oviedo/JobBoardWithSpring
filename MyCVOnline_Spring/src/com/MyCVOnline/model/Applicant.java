@@ -14,13 +14,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
-import com.MyCVOnline.configuration.IDgenerators.GenericIDgenerator;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "APPLICANTS")
 public class Applicant implements Serializable{
@@ -30,11 +31,7 @@ public class Applicant implements Serializable{
 
 	@Id
 	@Column(name = "APPLICANT_ID")
-	@GenericGenerator(name = "Applicant_SEQ", strategy = "com.MyCVOnline.configuration.IDgenerators.GenericIDgenerator", parameters = {
-			@Parameter(name = GenericIDgenerator.INCREMENT_PARAM, value = "1"),
-			@Parameter(name = GenericIDgenerator.VALUE_PREFIX_PARAMETER, value = "APCNT"),
-			@Parameter(name = GenericIDgenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Applicant_SEQ")
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String applicantID;
 	
 	@NotNull

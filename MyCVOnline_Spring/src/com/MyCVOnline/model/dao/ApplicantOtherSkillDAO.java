@@ -2,11 +2,12 @@ package com.MyCVOnline.model.dao;
 
 import java.util.ArrayList;
 
+import com.MyCVOnline.model.Applicant;
 import com.MyCVOnline.model.ApplicantOtherSkill;
 
 public interface ApplicantOtherSkillDAO {
 
-	public void insertApplicantOtherSkill(ApplicantOtherSkill otherSkill);
+	public void insertApplicantOtherSkill(Applicant applicant,ApplicantOtherSkill otherSkill);
 
 	public void deleteApplicantOtherSkill(String applicantID, String skillName);
 

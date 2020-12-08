@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.MyCVOnline.model.Applicant;
 import com.MyCVOnline.model.ApplicantExperience;
 import com.MyCVOnline.model.dao.ApplicantExperienceDAO;
 import com.MyCVOnline.model.service.ApplicantExperienceService;
@@ -13,9 +14,9 @@ public class ApplicantExperienceServiceImpl implements ApplicantExperienceServic
 	ApplicantExperienceDAO dao;
 
 	@Override
-	public void insertApplicantExperience(ApplicantExperience experience) {
+	public void insertApplicantExperience(Applicant applicant,ApplicantExperience experience) {
 		// TODO Auto-generated method stub
-		dao.insertApplicantExperience(experience);
+		dao.insertApplicantExperience(applicant,experience);
 	}
 
 	@Override
@@ -25,9 +26,9 @@ public class ApplicantExperienceServiceImpl implements ApplicantExperienceServic
 	}
 
 	@Override
-	public void retreiveApplicantExperience(String applicantID, String educationTitle) {
+	public void retreiveApplicantExperience(String applicantID, String experienceTitle) {
 		// TODO Auto-generated method stub
-		dao.retreiveApplicantExperience(applicantID, educationTitle);
+		dao.retreiveApplicantExperience(applicantID, experienceTitle);
 	}
 
 	@Override

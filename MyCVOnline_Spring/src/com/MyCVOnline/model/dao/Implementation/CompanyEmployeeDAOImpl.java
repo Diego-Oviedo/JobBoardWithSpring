@@ -1,0 +1,71 @@
+package com.MyCVOnline.model.dao.Implementation;
+
+import java.util.ArrayList;
+import org.hibernate.Criteria;
+import org.hibernate.query.Query;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.MyCVOnline.model.CompanyEmployee;
+import com.MyCVOnline.model.dao.AbstractDAO;
+import com.MyCVOnline.model.dao.CompanyEmployeeDAO;
+
+public class CompanyEmployeeDAOImpl extends AbstractDAO<CompanyEmployee> implements CompanyEmployeeDAO {
+
+	@Transactional
+	public void insertEmployee(CompanyEmployee employee) {
+		
+		save(employee);
+
+	}
+
+	@Transactional
+	public void deleteEmployee(String username) {
+		
+		Query query = getSession().createQuery("FROM COMPANIES_EMPLOYEES WHERE username = :username ");
+		query.setParameter("username", username);
+		
+		CompanyEmployee employee = (CompanyEmployee)query.uniqueResult();
+		
+		delete(employee);
+		
+
+	}
+
+	@Transactional
+	public CompanyEmployee retreiveEmployee(String username) {
+		
+		Query query = getSession().createQuery("FROM COMPANIES_EMPLOYEES WHERE username = :username ");
+		query.setParameter("username", username);
+		
+		CompanyEmployee employee = (CompanyEmployee)query.uniqueResult();
+		
+		return employee;
+	}
+
+	@Transactional
+	public void updateEmployee(CompanyEmployee employee) {
+		
+		Query query = getSession().createQuery("UPDATE COMPANIES_EMPLOYEES"
+												+ "PASSWORD = :password "
+												+ "EMPLOYEE_FULL_NAME = :fullName "
+												+ "WHERE USERNAME = :username");
+		query.setParameter("password", employee.getPassword());
+		query.setParameter("fullName", employee.getFullName());
+		query.setParameter("username", employee.getUsername());
+		
+		query.executeUpdate();
+
+	}
+
+	@Transactional
+	public ArrayList<CompanyEmployee> retreiveEmployees() {
+		
+		Criteria criteria = createEntityCriteria();
+		@SuppressWarnings("unchecked")
+		ArrayList<CompanyEmployee> all_employees = (ArrayList<CompanyEmployee>) criteria.list();
+		
+		
+		return all_employees;
+	}
+
+}

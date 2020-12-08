@@ -6,17 +6,11 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-
-import com.MyCVOnline.configuration.IDgenerators.GenericIDgenerator;
 
 @Entity
 @Table(name = "COMPANIES_POSITIONS")
@@ -26,11 +20,7 @@ public class CompanyPosition implements Serializable{
 	
 	@Id
 	@Column(name = "POSITION_ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Position_SEQ")
-	@GenericGenerator(name = "Position_SEQ", strategy = "com.MyCVOnline.configuration.IDgenerators.GenericIDgenerator", parameters = {
-			@Parameter(name = GenericIDgenerator.INCREMENT_PARAM, value = "1"),
-			@Parameter(name = GenericIDgenerator.VALUE_PREFIX_PARAMETER, value = "PSTN"),
-			@Parameter(name = GenericIDgenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private String positionID;
 
 	@Column(name = "JOB_TITLE")
