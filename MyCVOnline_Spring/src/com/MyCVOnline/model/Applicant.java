@@ -30,11 +30,11 @@ public class Applicant implements Serializable{
 
 	@Id
 	@Column(name = "APPLICANT_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQ")
 	@GenericGenerator(name = "ID_SEQ", strategy = "com.MyCVOnline.configuration.IDgenerators.GenericIDgenerator", parameters = {
 			@Parameter(name = GenericIDgenerator.INCREMENT_PARAM, value = "1"),
 			@Parameter(name = GenericIDgenerator.VALUE_PREFIX_PARAMETER, value = "APCNT"),
 			@Parameter(name = GenericIDgenerator.NUMBER_FORMAT_PARAMETER, value = "%03d") })
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQ")
 	private String applicantID;
 	
 	@NotNull

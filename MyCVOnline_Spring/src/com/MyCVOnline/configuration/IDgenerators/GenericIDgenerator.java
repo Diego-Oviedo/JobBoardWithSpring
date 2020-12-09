@@ -8,6 +8,7 @@ import org.hibernate.MappingException;
 import org.hibernate.SharedSessionContract;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.enhanced.SequenceStyleGenerator;
 import org.hibernate.internal.util.config.ConfigurationHelper;
 import org.hibernate.service.ServiceRegistry;
@@ -24,8 +25,8 @@ public class GenericIDgenerator extends SequenceStyleGenerator {
 	public static final String NUMBER_FORMAT_DEFAULT = "%d";
 	private String numberFormat;
 
-	public String generate(SharedSessionContract session, Object object) throws HibernateException {
-		return valuePrefix + String.format(numberFormat, super.generate((SessionImplementor) session, object));
+	public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
+		return valuePrefix + String.format(numberFormat, super.generate(session, object));
 	}
 
 	public void configure(Type type, Properties params, ServiceRegistry serviceRegistry) throws MappingException {
