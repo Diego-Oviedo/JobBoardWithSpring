@@ -14,7 +14,6 @@ import com.MyCVOnline.model.dao.ApplicantExperienceDAO;
 import com.MyCVOnline.model.service.ApplicantExperienceService;
 
 @Service("applicantExperienceService")
-@Transactional
 public class ApplicantExperienceServiceImpl implements ApplicantExperienceService {
 	
 	@Autowired

@@ -3,12 +3,14 @@ package com.MyCVOnline.model.dao.Implementation;
 import java.util.ArrayList;
 import org.hibernate.Criteria;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.MyCVOnline.model.CPositionQualification;
 import com.MyCVOnline.model.CompanyPosition;
 import com.MyCVOnline.model.dao.AbstractDAO;
 import com.MyCVOnline.model.dao.PositionQualificationDAO;
 
+@Repository("positionQualificationDAO")
 public class PositionQualificationDAOImpl extends AbstractDAO<CPositionQualification> implements PositionQualificationDAO {
 
 	@Transactional

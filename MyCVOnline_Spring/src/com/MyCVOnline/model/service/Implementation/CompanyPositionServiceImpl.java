@@ -1,11 +1,15 @@
 package com.MyCVOnline.model.service.Implementation;
 
 import java.util.ArrayList;
+
+import org.springframework.stereotype.Service;
+
 import com.MyCVOnline.model.CompanyEmployee;
 import com.MyCVOnline.model.CompanyPosition;
 import com.MyCVOnline.model.dao.CompanyPositionDAO;
 import com.MyCVOnline.model.service.CompanyPositionService;
 
+@Service("positionService")
 public class CompanyPositionServiceImpl implements CompanyPositionService {
 
 	CompanyPositionDAO dao;

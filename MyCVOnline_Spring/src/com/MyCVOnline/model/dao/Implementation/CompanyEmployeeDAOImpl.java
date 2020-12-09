@@ -3,12 +3,14 @@ package com.MyCVOnline.model.dao.Implementation;
 import java.util.ArrayList;
 import org.hibernate.Criteria;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.MyCVOnline.model.CompanyEmployee;
 import com.MyCVOnline.model.dao.AbstractDAO;
 import com.MyCVOnline.model.dao.CompanyEmployeeDAO;
 
+@Repository("employeeDAO")
 public class CompanyEmployeeDAOImpl extends AbstractDAO<CompanyEmployee> implements CompanyEmployeeDAO {
 
 	@Transactional

@@ -2,10 +2,13 @@ package com.MyCVOnline.model.service.Implementation;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
 import com.MyCVOnline.model.CompanyEmployee;
 import com.MyCVOnline.model.dao.CompanyEmployeeDAO;
 import com.MyCVOnline.model.service.CompanyEmployeeService;
 
+@Service("employeeService")
 public class CompanyEmployeeServiceImpl implements CompanyEmployeeService {
 
 	CompanyEmployeeDAO dao;

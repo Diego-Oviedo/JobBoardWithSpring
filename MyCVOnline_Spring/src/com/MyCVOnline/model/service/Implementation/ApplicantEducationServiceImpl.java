@@ -1,16 +1,15 @@
 package com.MyCVOnline.model.service.Implementation;
 
 import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 import com.MyCVOnline.model.Applicant;
 import com.MyCVOnline.model.ApplicantEducation;
 import com.MyCVOnline.model.dao.ApplicantEducationDAO;
 import com.MyCVOnline.model.service.ApplicantEducationService;
 
+@Service("applicantEducationService")
 public class ApplicantEducationServiceImpl implements ApplicantEducationService {
 	
 	@Autowired

@@ -1,12 +1,13 @@
 package com.MyCVOnline.model.service.Implementation;
 
 import java.util.ArrayList;
-
+import org.springframework.stereotype.Service;
 import com.MyCVOnline.model.Applicant;
 import com.MyCVOnline.model.ApplicantOtherSkill;
 import com.MyCVOnline.model.dao.ApplicantOtherSkillDAO;
 import com.MyCVOnline.model.service.ApplicantOtherSkillService;
 
+@Service("applicantOtherSkillService")
 public class ApplicantOtherSkillServiceImpl implements ApplicantOtherSkillService {
 
 	ApplicantOtherSkillDAO dao;

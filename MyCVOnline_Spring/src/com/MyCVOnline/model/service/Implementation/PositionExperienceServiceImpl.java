@@ -2,11 +2,14 @@ package com.MyCVOnline.model.service.Implementation;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
 import com.MyCVOnline.model.CPositionExperience;
 import com.MyCVOnline.model.CompanyPosition;
 import com.MyCVOnline.model.dao.PositionExperienceDAO;
 import com.MyCVOnline.model.service.PositionExperienceService;
 
+@Service("positionExperienceService")
 public class PositionExperienceServiceImpl implements PositionExperienceService {
 
 	PositionExperienceDAO dao;

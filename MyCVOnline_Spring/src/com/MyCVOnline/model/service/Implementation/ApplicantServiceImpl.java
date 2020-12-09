@@ -13,7 +13,6 @@ import com.MyCVOnline.model.dao.ApplicantDAO;
 import com.MyCVOnline.model.service.ApplicantService;
 
 @Service("applicantService")
-@Transactional
 class ApplicantServiceImpl implements ApplicantService {
 	
 	@Autowired
