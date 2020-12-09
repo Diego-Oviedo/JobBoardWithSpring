@@ -3,6 +3,7 @@ package com.MyCVOnline.model.service.Implementation;
 import java.util.ArrayList;
 
 import com.MyCVOnline.model.CPositionQualification;
+import com.MyCVOnline.model.CompanyPosition;
 import com.MyCVOnline.model.dao.PositionQualificationDAO;
 import com.MyCVOnline.model.service.PositionQualificationSarvice;
 
@@ -11,9 +12,9 @@ public class PositionQualificationSarviceImpl implements PositionQualificationSa
 	PositionQualificationDAO dao;
 
 	@Override
-	public void insertPositionQualification(CPositionQualification qualification) {
+	public void insertPositionQualification(CompanyPosition position ,CPositionQualification qualification) {
 		// TODO Auto-generated method stub
-		dao.insertPositionQualification(qualification);
+		dao.insertPositionQualification(position, qualification);
 	}
 
 	@Override

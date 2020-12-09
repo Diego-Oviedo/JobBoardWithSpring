@@ -193,8 +193,7 @@ public class ApplicantDAOImpl extends AbstractDAO<Applicant> implements Applican
 
 			getSession().close();
 			
-			System.out.println("Works when calling to the end of the method \n");
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

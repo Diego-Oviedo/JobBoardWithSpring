@@ -1,6 +1,7 @@
 package com.MyCVOnline.model.dao.Implementation;
 
 import java.util.ArrayList;
+import org.hibernate.Criteria;
 import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
 import com.MyCVOnline.model.CompanyEmployee;
@@ -68,45 +69,84 @@ public class CompanyPositionDAOImpl extends AbstractDAO<CompanyPosition> impleme
 	@Transactional
 	public ArrayList<CompanyPosition> retreiveJobPositions() {
 		
+		Criteria criteria = createEntityCriteria();
+		@SuppressWarnings("unchecked")
+		ArrayList<CompanyPosition> company_positions = (ArrayList<CompanyPosition>) criteria.list();
 		
 		
-		return null;
+		return company_positions;
 	}
 
 	@Transactional
 	public ArrayList<CompanyPosition> retreiveJobPositionsByCompanyID(String companyID) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Query query = getSession().createQuery("FROM COMPANIES_POSITIONS WHERE company_id IN ( company_id FROM COMPANIES c WHERE c.company_id :companyID ) ");
+		query.setParameter("companyID", companyID);
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<CompanyPosition> positions = (ArrayList<CompanyPosition>)query.getResultList();
+		
+		return positions;
 	}
 
 	@Transactional
 	public ArrayList<CompanyPosition> retreiveJobPositionsByCompanyName(String companyName) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Query query = getSession().createQuery("FROM COMPANIES_POSITIONS WHERE company_id IN ( company_id FROM COMPANIES c WHERE c.company_name LIKE '%:companyName%' ) ");
+		query.setParameter("companyName", companyName);
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<CompanyPosition> positions = (ArrayList<CompanyPosition>)query.getResultList();
+		
+		return positions;
 	}
 
 	@Transactional
 	public ArrayList<CompanyPosition> retreiveJobPositionsByCity(String city) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Query query = getSession().createQuery("FROM COMPANIES_POSITIONS WHERE company_id IN ( company_id FROM COMPANIES c WHERE c.city LIKE '%:city%' ) ");
+		query.setParameter("city", city);
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<CompanyPosition> positions = (ArrayList<CompanyPosition>)query.getResultList();
+		
+		return positions;
 	}
 
 	@Transactional
 	public ArrayList<CompanyPosition> retreiveJobPositionsByCountry(String country) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Query query = getSession().createQuery("FROM COMPANIES_POSITIONS WHERE company_id IN ( company_id FROM COMPANIES c WHERE c.country LIKE '%:country%' ) ");
+		query.setParameter("country", country);
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<CompanyPosition> positions = (ArrayList<CompanyPosition>)query.getResultList();
+		
+		return positions;
 	}
 
 	@Transactional
 	public ArrayList<CompanyPosition> retreiveJobPositionsByDomain(String domain) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Query query = getSession().createQuery("FROM COMPANIES_POSITIONS WHERE company_id IN ( company_id FROM COMPANIES c WHERE c.domain LIKE '%:domain%' ) ");
+		query.setParameter("domain", domain);
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<CompanyPosition> positions = (ArrayList<CompanyPosition>)query.getResultList();
+		
+		return positions;
 	}
 
 	@Transactional
 	public ArrayList<CompanyPosition> retreiveJobPositionsByTypeOfJob(String typeOfJob) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Query query = getSession().createQuery("FROM COMPANIES_POSITIONS WHERE type_of_job LIKE '%:typeOfJob%' ");
+		query.setParameter("typeOfJob", typeOfJob);
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<CompanyPosition> positions = (ArrayList<CompanyPosition>)query.getResultList();
+		
+		return positions;
 	}
 
 }

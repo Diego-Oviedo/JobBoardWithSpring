@@ -3,10 +3,11 @@ package com.MyCVOnline.model.dao;
 import java.util.ArrayList;
 
 import com.MyCVOnline.model.CPositionExperience;
+import com.MyCVOnline.model.CompanyPosition;
 
 public interface PositionExperienceDAO {
 
-	public void insertPositionExperience(CPositionExperience experience);
+	public void insertPositionExperience(CompanyPosition position ,CPositionExperience experience);
 
 	public void deletePositionExperience(String positionID, String experienceName);
 

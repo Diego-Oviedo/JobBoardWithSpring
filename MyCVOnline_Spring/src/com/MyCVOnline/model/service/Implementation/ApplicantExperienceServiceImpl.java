@@ -4,13 +4,20 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.MyCVOnline.model.Applicant;
 import com.MyCVOnline.model.ApplicantExperience;
 import com.MyCVOnline.model.dao.ApplicantExperienceDAO;
 import com.MyCVOnline.model.service.ApplicantExperienceService;
 
+@Service("applicantExperienceService")
+@Transactional
 public class ApplicantExperienceServiceImpl implements ApplicantExperienceService {
-
+	
+	@Autowired
 	ApplicantExperienceDAO dao;
 
 	@Override

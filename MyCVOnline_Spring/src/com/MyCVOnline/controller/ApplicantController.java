@@ -31,6 +31,9 @@ public class ApplicantController {
 	@Autowired
 	ApplicantService applicant_service;
 	
+	@Autowired
+	ApplicantExperienceService applicant_experience_service;
+	
 	 @Autowired
 	 MessageSource messageSource;
 
@@ -40,7 +43,14 @@ public class ApplicantController {
 	  
 	        ArrayList<Applicant> applicants = applicant_service.retreiveApplicants();
 	        model.addAttribute("applicants", applicants);
-	        return "AllApplicants";
+	        
+	        ArrayList<ApplicantExperience> experiences = applicant_experience_service.retreiveApplicantExperiences();
+	        
+	        System.out.println(experiences.get(0).getCompanyName());
+	        model.addAttribute("experiences", experiences);
+	        
+	        
+	        return "All-Applicants";
 	    }
 	 	
 	 	 // This method will list all display .    

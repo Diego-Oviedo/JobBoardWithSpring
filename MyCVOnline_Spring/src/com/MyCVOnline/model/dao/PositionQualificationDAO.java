@@ -3,10 +3,11 @@ package com.MyCVOnline.model.dao;
 import java.util.ArrayList;
 
 import com.MyCVOnline.model.CPositionQualification;
+import com.MyCVOnline.model.CompanyPosition;
 
 public interface PositionQualificationDAO {
 
-	public void insertPositionQualification(CPositionQualification qualification);
+	public void insertPositionQualification(CompanyPosition position ,CPositionQualification qualification);
 
 	public void deletePositionQualification(String positionID, String qualificationName);
 

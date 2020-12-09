@@ -5,7 +5,7 @@ import com.MyCVOnline.model.*;
 
 public interface PositionExperienceService {
 
-	public void insertPositionExperience(CPositionExperience experience);
+	public void insertPositionExperience(CompanyPosition position ,CPositionExperience experience);
 
 	public void deletePositionExperience(String positionID, String experienceName);
 

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Criteria;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.MyCVOnline.model.Applicant;
@@ -19,6 +20,7 @@ import com.MyCVOnline.model.ApplicantExperience;
 import com.MyCVOnline.model.dao.AbstractDAO;
 import com.MyCVOnline.model.dao.ApplicantExperienceDAO;
 
+@Repository("applicantExperienceDAO")
 public class ApplicantExperienceImpl extends AbstractDAO<ApplicantExperience> implements ApplicantExperienceDAO {
 
 	@Transactional

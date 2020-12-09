@@ -3,6 +3,7 @@ package com.MyCVOnline.model.service.Implementation;
 import java.util.ArrayList;
 
 import com.MyCVOnline.model.CPositionExperience;
+import com.MyCVOnline.model.CompanyPosition;
 import com.MyCVOnline.model.dao.PositionExperienceDAO;
 import com.MyCVOnline.model.service.PositionExperienceService;
 
@@ -11,9 +12,9 @@ public class PositionExperienceServiceImpl implements PositionExperienceService 
 	PositionExperienceDAO dao;
 
 	@Override
-	public void insertPositionExperience(CPositionExperience experience) {
+	public void insertPositionExperience(CompanyPosition position ,CPositionExperience experience) {
 		// TODO Auto-generated method stub
-		dao.insertPositionExperience(experience);
+		dao.insertPositionExperience(position,experience);
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import com.MyCVOnline.model.*;
 
 public interface PositionQualificationSarvice {
 
-	public void insertPositionQualification(CPositionQualification qualification);
+	public void insertPositionQualification(CompanyPosition position , CPositionQualification qualification);
 
 	public void deletePositionQualification(String positionID, String qualificationName);
 
