@@ -6,15 +6,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletResponse;
-
 import org.hibernate.Criteria;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.MyCVOnline.model.Applicant;
 import com.MyCVOnline.model.Company;
 import com.MyCVOnline.model.dao.AbstractDAO;
 import com.MyCVOnline.model.dao.CompanyDAO;

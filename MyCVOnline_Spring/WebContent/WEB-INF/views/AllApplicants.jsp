@@ -57,39 +57,6 @@ Applicants:  <br>
 	
 	</tbody>
 	</c:forEach>
-	
-	</table>
-	
-		
-		<table>
-		<tr>
-			<th colspan="7">APPLICANTS_EDUCATION</th>
-		</tr>
-		<tr>
-			<th>APPLICANT</th>
-			<th>EDUCATION_TITLE</th>
-			<th>SCHOOL_NAME</th>
-			<th>START_DATE</th>
-			<th>END_DATE</th>
-			<th>DESCRIPTION</th>
-			<th>Logo</th>
-		</tr>
-		<c:forEach var="experience" items="${experiences}">
-		<tr>
-			<td>${experience.applicant.applicantID}</td>
-			<td>${experience.experienceTitle}</td>
-			<td>${experience.companyName}</td>
-			<td>${experience.startDate}</td>
-			<td>${experience.endDate}</td>
-			<td>${experience.description}</td>
-			<td>${experience.expLogo}</td>
-		</tr>
-		</c:forEach>
-		
-		</table>
-		
-	
-
 
 
 	<a href="<c:url value='New-Applicant' />">Add New Applicant</a>
