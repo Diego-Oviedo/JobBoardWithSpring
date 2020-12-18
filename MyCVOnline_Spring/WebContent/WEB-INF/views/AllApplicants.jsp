@@ -12,7 +12,7 @@
         }
     </style>
 
-<title>Applicant | Applicant List</title>
+<title>Applicant | Applicants List</title>
 </head>
 <body>
 

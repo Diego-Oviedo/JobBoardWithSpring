@@ -115,7 +115,7 @@ public class ApplicantController {
 	        if (result.hasErrors()) {
 	            return "registration";
 	            }
-	        
+ 	        
 	        if(applicant_service.isApplicantIDUnique(applicant.getUsername())){
 	        	
 	            FieldError IDError =new FieldError("applicant","username",messageSource.getMessage("non.unique.ID", new String[]{applicant.getUsername()}, null));

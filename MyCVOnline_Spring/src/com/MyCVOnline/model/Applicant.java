@@ -10,8 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+
+import com.MyCVOnline.model.validators.postalCodeCA;
+
 
 @Entity
 @Table(name = "APPLICANTS")
@@ -26,11 +33,12 @@ public class Applicant implements Serializable{
 	private String applicantID;
 	
 	@NotNull
-	@Size(min=5, max=15)
+	@Size(min=5, max=15, message="Username must be greater that 5 and less than 15 characteres.")
 	@Column(name = "USERNAME")
 	private String username;
 	
 	@NotNull
+	@Size(min=8, message="At least 8 characteres.")
 	@Column(name = "PASSWORD")
 	private String password;
 	
@@ -49,12 +57,15 @@ public class Applicant implements Serializable{
 	private String phoneNumber;
 	
 	@NotNull
+	@Email
 	@Column(name = "EMAIL")
 	private String email;
 
 	@Column(name = "STREET_ADDRESS")
 	private String streetAddress;
-
+	
+	//@Pattern(regexp="[A-Z0-9]{6}", message="Please introduce a valid  postal code and use Caps.")
+	@postalCodeCA
 	@Column(name = "POSTAL_CODE")
 	private String postalCode;
 
@@ -69,6 +80,19 @@ public class Applicant implements Serializable{
 
 	@Column(name = "ABOUT_YOU")
 	private String aboutYou;
+	
+	
+	//space trimmer for forms 
+	@InitBinder
+	 public void binder_container(WebDataBinder binder) {
+		 
+		 StringTrimmerEditor space_trimmer = new StringTrimmerEditor(true);
+		 
+		 binder.registerCustomEditor(String.class, space_trimmer);
+		 
+	 }
+	
+	
 
 	@Lob
 	@Column(name = "PROFILE_PICTURE", columnDefinition = "BLOB")
