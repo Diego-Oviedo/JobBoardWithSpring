@@ -22,6 +22,8 @@ public interface ApplicantService {
 
 	public ArrayList<Applicant> retreiveApplicants();
 
-	public boolean isApplicantIDUnique(String applicantID);
+	public boolean isApplicantIDAlreadyExists(String applicantID);
+	
+	public boolean isApplicantUsernameAlreadyExists(String username);
 
 }

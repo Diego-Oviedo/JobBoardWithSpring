@@ -11,9 +11,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.annotations.Type;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
 
 @Entity
@@ -24,14 +28,17 @@ public class ApplicantExperience implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "EXPERIENCE_TITLE")
+	@NotEmpty
 	private String experienceTitle;
 
 	@Column(name = "COMPANY_NAME")
+	@NotEmpty
 	private String companyName;
 	
 	@DateTimeFormat(pattern = "DD/MM/YYYY")
 	@Type(type = "org.hibernate.type.LocalDateTimeType")
 	@Column(name = "START_DATE", nullable = false)
+	@NotEmpty
 	private LocalDateTime startDate;
 	
 	@DateTimeFormat(pattern = "DD/MM/YYYY")
@@ -50,6 +57,17 @@ public class ApplicantExperience implements Serializable{
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "APPLICANT_ID")
 	private Applicant applicant;
+	
+	
+	//space trimmer for forms 
+		@InitBinder
+		 public void binder_container(WebDataBinder binder) {
+			 
+			 StringTrimmerEditor space_trimmer = new StringTrimmerEditor(true);
+			 
+			 binder.registerCustomEditor(String.class, space_trimmer);
+			 
+		 }
 
 	public ApplicantExperience() {
 		super();

@@ -31,7 +31,7 @@ public class ApplicantExperienceImpl extends AbstractDAO<ApplicantExperience> im
 	@Transactional
 	public void deleteApplicantExperience(String applicantID, String experienceTitle) {
 		
-		Query query = getSession().createQuery("FROM APPLICANTS_EXPERIENCES WHERE applicant_id = :applicantID AND experience_title = :experienceTitle ");
+		Query query = getSession().createQuery("FROM ApplicantExperience WHERE applicant_id = :applicantID AND experience_title = :experienceTitle ");
 		query.setParameter("applicantID", applicantID);
 		query.setParameter("experienceTitle", experienceTitle);
 		
@@ -44,7 +44,7 @@ public class ApplicantExperienceImpl extends AbstractDAO<ApplicantExperience> im
 	@Transactional
 	public ApplicantExperience retreiveApplicantExperience(String applicantID, String experienceTitle) {
 		
-		Query query = getSession().createQuery("FROM APPLICANTS_EXPERIENCES WHERE applicant_id = :applicantID AND experience_title = :experienceTitle ");
+		Query query = getSession().createQuery("FROM ApplicantExperience WHERE applicant_id = :applicantID AND experience_title = :experienceTitle ");
 		query.setParameter("applicantID", applicantID);
 		query.setParameter("experienceTitle", experienceTitle);
 		
@@ -56,7 +56,7 @@ public class ApplicantExperienceImpl extends AbstractDAO<ApplicantExperience> im
 	@Transactional
 	public ArrayList<ApplicantExperience> retreiveApplicantExperiencesByID(String applicantID) {
 		
-		Query query = getSession().createQuery("FROM APPLICANTS_EXPERIENCES WHERE applicant_id = :applicantID ");
+		Query query = getSession().createQuery("FROM ApplicantExperience WHERE applicant_id = :applicantID ");
 		query.setParameter("applicantID", applicantID);
 		
 		ArrayList<ApplicantExperience> experiences = (ArrayList<ApplicantExperience>)query.getResultList();
@@ -78,7 +78,7 @@ public class ApplicantExperienceImpl extends AbstractDAO<ApplicantExperience> im
 
 			out = response.getOutputStream();
 
-			query = getSession().createQuery("FROM APPLICANTS_EDUCATION WHERE applicant_id = :applicantID AND experience_title = :experienceTitle ");
+			query = getSession().createQuery("FROM ApplicantExperience WHERE applicant_id = :applicantID AND experience_title = :experienceTitle ");
 			query.setParameter("applicantID", applicantID);
 			query.setParameter("experienceTitle", experienceTitle);
 
@@ -113,7 +113,7 @@ public class ApplicantExperienceImpl extends AbstractDAO<ApplicantExperience> im
 
 	@Transactional
 	public void updateApplicantExperience(ApplicantExperience experience) {
-		Query query = getSession().createQuery("UPDATE APPLICANTS_EDUCATION SET"
+		Query query = getSession().createQuery("UPDATE ApplicantExperience SET "
 				+ "EXPERIENCE_TITLE = :experienceTitle,"
 				+ "COMPANY_NAME = :companyName,"
 				+ "START_DATE = :startDate,"

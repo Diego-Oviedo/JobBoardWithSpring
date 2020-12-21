@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Criteria;
+import org.hibernate.NonUniqueObjectException;
 import org.hibernate.query.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -22,6 +23,19 @@ public class ApplicantDAOImpl extends AbstractDAO<Applicant> implements Applican
 	@Transactional
 	public void insertApplicant(Applicant applicant) {
 
+		String ID = applicantIDGenerator();
+		
+			applicant.setApplicantID(ID);
+				save(applicant);
+
+	}
+	
+	
+	
+	// This method will handle a creation and a non-unique ID validation.  
+	// Logic: If the ID created already exists -> add a digit at the end of the ID 
+	public String applicantIDGenerator() {
+		
 		final String PREFIX = "APCNT"; 
 		int APCNT_number = retreiveApplicants().size()+1;
 		String digits = null ;
@@ -34,7 +48,11 @@ public class ApplicantDAOImpl extends AbstractDAO<Applicant> implements Applican
 			
 			ID = PREFIX + digits + APCNT_number;
 			
-			applicant.setApplicantID(ID);
+			if(isApplicantIDAlreadyExists(ID)) {
+				
+				ID = PREFIX + digits + (APCNT_number+1);
+			}
+			
 			
 		}else if (APCNT_number <= 99) {
 			
@@ -42,7 +60,10 @@ public class ApplicantDAOImpl extends AbstractDAO<Applicant> implements Applican
 			
 			ID = PREFIX + digits + APCNT_number;
 			
-			applicant.setApplicantID(ID);
+			if(isApplicantIDAlreadyExists(ID)) {
+				
+				ID = PREFIX + digits + (APCNT_number+1);
+			}
 			
 		}else if (APCNT_number <= 999) {
 			
@@ -50,7 +71,11 @@ public class ApplicantDAOImpl extends AbstractDAO<Applicant> implements Applican
 			
 			ID = PREFIX + digits + APCNT_number;
 			
-			applicant.setApplicantID(ID);
+			if(isApplicantIDAlreadyExists(ID)) {
+				
+				ID = PREFIX + digits + (APCNT_number+1);
+			}
+			
 			
 		}else if (APCNT_number <= 9999) {
 			
@@ -58,27 +83,31 @@ public class ApplicantDAOImpl extends AbstractDAO<Applicant> implements Applican
 			
 			ID = PREFIX + digits + APCNT_number;
 			
-			applicant.setApplicantID(ID);
+			if(isApplicantIDAlreadyExists(ID)) {
+				
+				ID = PREFIX + digits + (APCNT_number+1);
+			}
 			
 			
-		}else if (APCNT_number >= 10000) {
-			
+		}else if (APCNT_number >= 10000) {	
 			
 			ID = PREFIX + APCNT_number;
 			
-			applicant.setApplicantID(ID);
+			if(isApplicantIDAlreadyExists(ID)) {
+				
+				ID = PREFIX + digits + (APCNT_number+1);
+			}
 			
 		}
 		
-		
-		save(applicant);
-
+		return ID;
 	}
+	
 
 	@Transactional
 	public void insertApplicantAboutYou(String applicantID, String aboutYou) {
 		
-		Query query = getSession().createQuery("UPDATE APPLICANTS SET about_you = :aboutYou WHERE applicant_id = :applicantID ");
+		Query query = getSession().createQuery("UPDATE Applicant SET about_you = :aboutYou WHERE applicant_id = :applicantID ");
 		query.setParameter("aboutYou", aboutYou);
 		query.setParameter("applicantID", applicantID);
 		query.executeUpdate();
@@ -106,7 +135,7 @@ public class ApplicantDAOImpl extends AbstractDAO<Applicant> implements Applican
 	@Transactional
 	public Applicant retreiveUser(String username) {
 		
-		Query query = getSession().createQuery("FROM APPLICANTS WHERE username = :username ");
+		Query query = getSession().createQuery("FROM Applicant WHERE username = :username ");
 		query.setParameter("username", username);
 		
 		Applicant applicant = (Applicant)query.uniqueResult();
@@ -118,21 +147,21 @@ public class ApplicantDAOImpl extends AbstractDAO<Applicant> implements Applican
 	public void updateApplicant(Applicant applicant) {
 		
 		
-		Query query = getSession().createQuery("UPDATE APPLICANTS SET"
-				+ "USERNAME = :username,"
-				+ "PASSWORD = :password,"
-				+ "FIRST_NAME = :firstName,"
-				+ "LAST_NAME = :lastName,"
-				+ "PROFESSION = :profession,"
-				+ "PHONE_NUMBER = :phoneNumber,"
-				+ "EMAIL = :email,"
-				+ "STREET_ADDRESS = :streetAddress,"
-				+ "POSTAL_CODE = :postalCode,"
-				+ "CITY = :city,"
-				+ "PROVINCE = :province,"
-				+ "COUNTRY = :country,"
-				+ "ABOUT_YOU = :aboutYou,"
-				+ "PROFILE_PICTURE = :profilePicture,"
+		Query query = getSession().createQuery("UPDATE Applicant SET "
+				+ "USERNAME = :username, "
+				+ "PASSWORD = :password, "
+				+ "FIRST_NAME = :firstName, "
+				+ "LAST_NAME = :lastName, "
+				+ "PROFESSION = :profession, "
+				+ "PHONE_NUMBER = :phoneNumber, "
+				+ "EMAIL = :email, "
+				+ "STREET_ADDRESS = :streetAddress, "
+				+ "POSTAL_CODE = :postalCode, "
+				+ "CITY = :city, "
+				+ "PROVINCE = :province, "
+				+ "COUNTRY = :country, "
+				+ "ABOUT_YOU = :aboutYou, "
+				+ "PROFILE_PICTURE = :profilePicture "
 				+ "WHERE applicant_id = :applicantID ");
 		query.setParameter("username", applicant.getUsername());
 		query.setParameter("password", applicant.getPassword());
@@ -151,6 +180,7 @@ public class ApplicantDAOImpl extends AbstractDAO<Applicant> implements Applican
 		query.setParameter("applicantID", applicant.getApplicantID());
 		query.executeUpdate();
 
+
 	}
 
 	@Transactional
@@ -168,7 +198,7 @@ public class ApplicantDAOImpl extends AbstractDAO<Applicant> implements Applican
 
 			out = response.getOutputStream();
 
-			query = getSession().createQuery("FROM APPLICANTS WHERE applicant_id = :applicantID");
+			query = getSession().createQuery("FROM Applicant WHERE applicant_id = :applicantID");
 			query.setParameter("applicantID", applicantID);
 
 			ResultSet result = (ResultSet) query.list();
@@ -208,6 +238,22 @@ public class ApplicantDAOImpl extends AbstractDAO<Applicant> implements Applican
 		ArrayList<Applicant> applicants = (ArrayList<Applicant>) criteria.list();
 		
 		return applicants;
+	}
+	
+	@Transactional
+	public boolean isApplicantIDAlreadyExists(String applicantID) {
+		// TODO Auto-generated method stub
+		Applicant applicant = retreiveApplicant(applicantID);
+		
+		return (applicant != null);
+	}
+	
+	@Transactional
+	public boolean isApplicantUsernameAlreadyExists(String username) {
+		// TODO Auto-generated method stub
+		Applicant applicant = retreiveUser(username);
+		
+		return (applicant != null);
 	}
 
 }

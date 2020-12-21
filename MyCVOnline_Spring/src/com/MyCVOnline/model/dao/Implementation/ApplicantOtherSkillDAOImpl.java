@@ -24,7 +24,7 @@ public class ApplicantOtherSkillDAOImpl extends AbstractDAO<ApplicantOtherSkill>
 	@Transactional
 	public void deleteApplicantOtherSkill(String applicantID, String skillName) {
 		
-		Query query = getSession().createQuery("FROM APPLICANTS_OTHER_SKILLS WHERE applicant_id = :applicantID AND skill_name = :skillName ");
+		Query query = getSession().createQuery("FROM ApplicantOtherSkillDAOImpl WHERE applicant_id = :applicantID AND skill_name = :skillName ");
 		query.setParameter("applicantID", applicantID);
 		query.setParameter("skillName", skillName);
 		
@@ -38,7 +38,7 @@ public class ApplicantOtherSkillDAOImpl extends AbstractDAO<ApplicantOtherSkill>
 	@Transactional
 	public ApplicantOtherSkill retreiveApplicantOtherSkill(String applicantID, String skillName) {
 		
-		Query query = getSession().createQuery("FROM APPLICANTS_OTHER_SKILLS WHERE applicant_id = :applicantID AND skill_name = :skillName ");
+		Query query = getSession().createQuery("FROM ApplicantOtherSkillDAOImpl WHERE applicant_id = :applicantID AND skill_name = :skillName ");
 		query.setParameter("applicantID", applicantID);
 		query.setParameter("skillName", skillName);
 		
@@ -50,7 +50,7 @@ public class ApplicantOtherSkillDAOImpl extends AbstractDAO<ApplicantOtherSkill>
 	@Transactional
 	public ArrayList<ApplicantOtherSkill> retreiveAppicantOtherSkillsByID(String applicantID) {
 		
-		Query query = getSession().createQuery("FROM APPLICANTS_OTHER_SKILLS WHERE applicant_id = :applicantID ");
+		Query query = getSession().createQuery("FROM ApplicantOtherSkillDAOImpl WHERE applicant_id = :applicantID ");
 		query.setParameter("applicantID", applicantID);
 		
 		@SuppressWarnings("unchecked")
@@ -62,7 +62,7 @@ public class ApplicantOtherSkillDAOImpl extends AbstractDAO<ApplicantOtherSkill>
 	@Transactional
 	public void updateApplicantOtherSkill(ApplicantOtherSkill otherSkill) {
 		
-		Query query = getSession().createQuery("UPDATE APPLICANTS_OTHER_SKILLS"
+		Query query = getSession().createQuery("UPDATE ApplicantOtherSkillDAOImpl "
 								+ " SKILL_NAME = :skillName "
 								+ "WHERE applicant_id = :applicantID ");
 		query.setParameter("skillName", otherSkill.getSkillName());

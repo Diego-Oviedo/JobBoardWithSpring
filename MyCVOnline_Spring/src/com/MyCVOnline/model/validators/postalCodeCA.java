@@ -18,7 +18,7 @@ public @interface postalCodeCA {
 	
 	//Defining the default error message
 	
-	public String message() default "The postal code must be a\n a combination of letters and numbers";
+	public String message() default "The postal code must be a\n a combination of letters and numbers. Example: K4L1W3";
 	
 	//Defining groups 
 	

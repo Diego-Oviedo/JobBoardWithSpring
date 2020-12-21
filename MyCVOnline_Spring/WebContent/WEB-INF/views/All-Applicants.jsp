@@ -23,7 +23,7 @@ Applicants:  <br>
 
 <thead>
 	<tr>
-			<th colspan="12">APPLICANTS</th>
+			<th colspan="14">APPLICANTS</th>
 	</tr>
 	<th>APPLICANT ID</th>
 	<th>USERNAME</th>
@@ -34,9 +34,11 @@ Applicants:  <br>
 	<th>STREET_ADDRESS</th>
 	<th>POSTAL_CODE</th>
 	<th>CITY</th>
+	<th>PROVINCE</th>
 	<th>COUNTRY</th>
 	<th>ABOUT_YOU</th>
 	<th>PROFILE_PICTURE</th>
+	<th>ACTION</th>
 
 </thead>
 
@@ -49,11 +51,13 @@ Applicants:  <br>
 		<td>${applicant.phoneNumber}</td>
 		<td>${applicant.email}</td>
 		<td>${applicant.streetAddress}</td>
+		<td>${applicant.postalCode}</td>
 		<td>${applicant.city}</td>
 		<td>${applicant.province}</td>
 		<td>${applicant.country}</td>
 		<td>${applicant.aboutYou}</td>
 		<td><img width="200" alt="No picture in record" src="/All-Applicants_Pictures?applicantID=${applicant.applicantID}"/>"/></td>
+		<td><a href="${pageContext.request.contextPath}/Applicants/edit-${applicant.applicantID}-applicant">Edit Applicant</a></td>
 	
 	</tbody>
 	</c:forEach>

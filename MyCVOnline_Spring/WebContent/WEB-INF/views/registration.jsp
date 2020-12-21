@@ -21,6 +21,8 @@
 
  <h2>Registration Form</h2>
    
+   <br>${error_adding_applicant}<br>
+   
     <form:form method="POST" modelAttribute="applicant">
         <form:input type="hidden" path="applicantID" id="applicantID"/>
         <table>
@@ -40,6 +42,18 @@
                 <td><label for="username">Username: </label> </td>
                 <td><form:input path="username" id="username"/></td>
                 <td><form:errors path="username" cssClass="error"/></td>
+            </tr>
+            
+           	<tr>
+                <td><label for="password">Password: </label> </td>
+                <td><form:input path="password" id="password" placeholder="${applicant.password}"/></td>
+                <td><form:errors path="password" cssClass="error"/></td>
+            </tr>
+            
+            <tr>
+                <td><label for="profession">Profession: </label> </td>
+                <td><form:input path="profession" id="profession"/></td>
+                <td><form:errors path="profession" cssClass="error"/></td>
             </tr>
       
             <tr>
@@ -71,6 +85,13 @@
                 <td><form:input path="city" id="city"/></td>
                 <td><form:errors path="city" cssClass="error"/></td>
             </tr>
+            
+            <tr>
+                <td><label for="province">Province: </label> </td>
+                <td><form:input path="province" id="province"/></td>
+                <td><form:errors path="province" cssClass="error"/></td>
+            </tr>
+            
             
             <tr>
                 <td><label for="country">Country: </label> </td>

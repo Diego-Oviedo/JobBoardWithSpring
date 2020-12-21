@@ -88,11 +88,16 @@ class ApplicantServiceImpl implements ApplicantService {
 	}
 
 	@Override
-	public boolean isApplicantIDUnique(String applicantID) {
+	public boolean isApplicantIDAlreadyExists(String applicantID) {
 		// TODO Auto-generated method stub
-		Applicant applicant = dao.retreiveApplicant(applicantID);
-
-		return (applicant == null);
+		return dao.isApplicantIDAlreadyExists(applicantID);
 	}
+	
+	@Override
+	public boolean isApplicantUsernameAlreadyExists(String username) {
+		// TODO Auto-generated method stub
+		return dao.isApplicantUsernameAlreadyExists(username);
+	}
+
 
 }

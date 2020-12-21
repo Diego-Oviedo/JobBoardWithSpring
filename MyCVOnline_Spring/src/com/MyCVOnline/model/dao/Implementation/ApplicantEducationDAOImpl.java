@@ -31,7 +31,7 @@ public class ApplicantEducationDAOImpl extends AbstractDAO<ApplicantEducation> i
 	@Transactional
 	public void deleteApplicantEducation(String applicantID, String educationTitle) {
 		
-		Query query = getSession().createQuery("FROM APPLICANTS_EDUCATION WHERE applicant_id = :applicantID AND education_title = :educationTitle ");
+		Query query = getSession().createQuery("FROM ApplicantEducation WHERE applicant_id = :applicantID AND education_title = :educationTitle ");
 		query.setParameter("applicantID", applicantID);
 		query.setParameter("educationTitle", educationTitle);
 		
@@ -45,7 +45,7 @@ public class ApplicantEducationDAOImpl extends AbstractDAO<ApplicantEducation> i
 	@Transactional
 	public ApplicantEducation retreiveApplicantEducation(String applicantID, String educationTitle) {
 		
-		Query query = getSession().createQuery("FROM APPLICANTS_EDUCATION WHERE applicant_id = :applicantID AND education_title = :educationTitle ");
+		Query query = getSession().createQuery("FROM ApplicantEducation WHERE applicant_id = :applicantID AND education_title = :educationTitle ");
 		query.setParameter("applicantID", applicantID);
 		query.setParameter("educationTitle", educationTitle);
 		
@@ -82,7 +82,7 @@ public class ApplicantEducationDAOImpl extends AbstractDAO<ApplicantEducation> i
 
 			out = response.getOutputStream();
 
-			query = getSession().createQuery("FROM APPLICANTS_EDUCATION WHERE applicant_id = :applicantID AND education_title = :educationTitle ");
+			query = getSession().createQuery("FROM ApplicantEducation WHERE applicant_id = :applicantID AND education_title = :educationTitle ");
 			query.setParameter("applicantID", applicantID);
 			query.setParameter("educationTitle", educationTitle);
 
@@ -118,7 +118,7 @@ public class ApplicantEducationDAOImpl extends AbstractDAO<ApplicantEducation> i
 	@Transactional
 	public void updateApplicantEducation(ApplicantEducation education) {
 		
-		Query query = getSession().createQuery("UPDATE APPLICANTS_EDUCATION SET"
+		Query query = getSession().createQuery("UPDATE ApplicantEducation SET "
 												+ "EDUCATION_TITLE = :educationTitle,"
 												+ "SCHOOL_NAME = :schoolName,"
 												+ "START_DATE = :startDate,"

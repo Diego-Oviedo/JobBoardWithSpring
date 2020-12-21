@@ -21,5 +21,9 @@ public interface ApplicantDAO {
 	public void displayApplicantProfilePicture(String applicantID, HttpServletResponse response);
 
 	public ArrayList<Applicant> retreiveApplicants();
+	
+	public boolean isApplicantIDAlreadyExists(String applicantID);
+	
+	public boolean isApplicantUsernameAlreadyExists(String username);
 
 }

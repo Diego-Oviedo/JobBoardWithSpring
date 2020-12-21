@@ -98,8 +98,6 @@ public class ApplicantController {
 	    @RequestMapping(value = { "/New-Applicant" }, method = RequestMethod.GET)
 	    public String newApplicant(ModelMap model) {
 	    	
-	    	
-	    	
 	        Applicant applicant = new Applicant();
 	        model.addAttribute("applicant", applicant);
 	        model.addAttribute("edit", false);
@@ -113,29 +111,42 @@ public class ApplicantController {
 	            ModelMap model) {
 	    	
 	        if (result.hasErrors()) {
+	        	
+	        	model.addAttribute("error_adding_applicant","ERROR: " + result.getFieldError()); 
+	            
+	        	
 	            return "registration";
 	            }
  	        
-	        if(applicant_service.isApplicantIDUnique(applicant.getUsername())){
+	        	if(applicant_service.isApplicantUsernameAlreadyExists(applicant.getUsername())){
 	        	
 	            FieldError IDError =new FieldError("applicant","username",messageSource.getMessage("non.unique.ID", new String[]{applicant.getUsername()}, null));
 	            result.addError(IDError);
+	            
 	            return "registration";
 	        	}
-	          
-	        applicant_service.insertApplicant(applicant);
-	  
-	        model.addAttribute("success", "Applicant " + applicant.getFirstName() + " " + applicant.getLastName()+ " registered successfully");
-	        return "success";
+	        	else if(!result.hasErrors()) {
+	        		 
+	        		applicant_service.insertApplicant(applicant);
+	        		  
+	        	}
+	        	
+     	        model.addAttribute("success", "Applicant " + applicant.getFirstName() + " " + applicant.getLastName()+ " registered successfully");
+     	        return "success";
 	    }
 	      
+	    
+	    
+	    
+	    
+	    
 	     // This method will provide the medium to update an existing applicant.     
 	    @RequestMapping(value = { "/edit-{applicantID}-applicant" }, method = RequestMethod.GET)
 	    public String editApplicant(@PathVariable String applicantID, ModelMap model) {
 	    	Applicant applicant = applicant_service.retreiveApplicant(applicantID);
 	        model.addAttribute("applicant", applicant);
 	        model.addAttribute("edit", true);
-	        return "registration";
+	        return "Applicant";
 	    }
 	      
 	    
@@ -147,26 +158,47 @@ public class ApplicantController {
 	            ModelMap model, @PathVariable String applicantID) {
 	  
 	        if (result.hasErrors()) {
-	            return "registration";
+	        	
+	        	model.addAttribute("error_editing_applicant","ERROR: " + result.getFieldError()); 
+	            return "Applicant";
 	        }
-	  
-	        if(!applicant_service.isApplicantIDUnique(applicantID)){
-	        	FieldError IDError =new FieldError("applicant","applicantID",messageSource.getMessage("non.unique.ID", new String[]{applicant.getApplicantID()}, null));
+	        
+	        
+	        //if the userame to edit already exists and is different that the previous one -> you will have to choose another oner 
+	        if(applicant_service.isApplicantUsernameAlreadyExists(applicant.getUsername())&& !applicant.getUsername().equalsIgnoreCase(applicant.getUsername())){
+	        	
+	            FieldError IDError =new FieldError("applicant","username",messageSource.getMessage("non.unique.ID", new String[]{applicant.getUsername()}, null));
 	            result.addError(IDError);
+	            
+	            return "registration";
+	        	}
+	  
+	        if(!applicant_service.isApplicantIDAlreadyExists(applicantID)){
+	            
+	            model.addAttribute("error_editing_applicant","The Applicant " + applicant.getFirstName() + " " + applicant.getLastName()+ " haven't been previously registered\n Please register as a new applicant.\n "); 
+	            
 	            return "registration";
 	        }
-	  
-	        applicant_service.updateApplicant(applicant);
-	  
+	        
+	        else if(!result.hasErrors()) {
+       		 
+	        	applicant_service.updateApplicant(applicant);
+        		  
+        	}
+
 	        model.addAttribute("success", "Applicant " + applicant.getFirstName() + " " + applicant.getLastName()+ " updated successfully");
 	        return "success";
 	    }
 	          
 	     // This method will delete an applicant by it's ID value.     
 	    @RequestMapping(value = { "/delete-{applicantID}-applicant" }, method = RequestMethod.GET)
-	    public String deleteApplicant(@PathVariable String applicantID) {
+	    public String deleteApplicant(@PathVariable String applicantID,ModelMap model) {
+	    	
 	    	applicant_service.deleteApplicant(applicantID);
-	        return "redirect:/AllApplicants";
+	        
+	    	model.addAttribute("success", "Applicant successfully deleted!");
+	        return "success";
+	    	
 	    }
 	 
 	 

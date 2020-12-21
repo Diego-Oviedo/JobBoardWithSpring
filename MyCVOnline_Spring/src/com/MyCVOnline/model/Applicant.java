@@ -11,12 +11,11 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-
 import com.MyCVOnline.model.validators.postalCodeCA;
 
 
@@ -32,21 +31,21 @@ public class Applicant implements Serializable{
 	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String applicantID;
 	
-	@NotNull
-	@Size(min=5, max=15, message="Username must be greater that 5 and less than 15 characteres.")
+	@NotEmpty
+	@Size(min=5, max=15)
 	@Column(name = "USERNAME")
 	private String username;
 	
-	@NotNull
-	@Size(min=8, message="At least 8 characteres.")
+	@NotEmpty
+	@Size(min=8)
 	@Column(name = "PASSWORD")
 	private String password;
 	
-	@NotNull
+	@NotEmpty
 	@Column(name = "FIRST_NAME")
 	private String firstName;
 
-	@NotNull
+	@NotEmpty
 	@Column(name = "LAST_NAME")
 	private String lastName;
 
@@ -56,7 +55,7 @@ public class Applicant implements Serializable{
 	@Column(name = "PHONE_NUMBER")
 	private String phoneNumber;
 	
-	@NotNull
+	@NotEmpty
 	@Email
 	@Column(name = "EMAIL")
 	private String email;
@@ -64,7 +63,7 @@ public class Applicant implements Serializable{
 	@Column(name = "STREET_ADDRESS")
 	private String streetAddress;
 	
-	//@Pattern(regexp="[A-Z0-9]{6}", message="Please introduce a valid  postal code and use Caps.")
+	//@Pattern(regex="[A-Z0-9]{6}", message="Please introduce a valid  postal code and use Caps.")
 	@postalCodeCA
 	@Column(name = "POSTAL_CODE")
 	private String postalCode;

@@ -9,6 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
 @Entity
 @Table(name = "APPLICANTS_OTHER_SKILLS")
@@ -24,8 +29,20 @@ public class ApplicantOtherSkill implements Serializable{
 	private Applicant applicant;
 
 	@Column(name = "SKILL_NAME")
+	@NotEmpty
 	private String skillName;
 
+	//space trimmer for forms 
+		@InitBinder
+		 public void binder_container(WebDataBinder binder) {
+			 
+			 StringTrimmerEditor space_trimmer = new StringTrimmerEditor(true);
+			 
+			 binder.registerCustomEditor(String.class, space_trimmer);
+			 
+		 }
+	
+	
 	public ApplicantOtherSkill() {
 		super();
 	}

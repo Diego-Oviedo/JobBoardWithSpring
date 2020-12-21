@@ -11,6 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
 @Entity
 @Table(name = "COMPANIES")
@@ -23,15 +28,18 @@ public class Company implements Serializable{
 	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private String companyID;
 
+	@NotEmpty
 	@Column(name = "COMPANY_NAME")
 	private String companyName;
 
 	@Column(name = "PHONE_NUMBER")
 	private String phoneNumber;
 
+	@NotEmpty
 	@Column(name = "EMAIL")
 	private String email;
 
+	@NotEmpty
 	@Column(name = "CITY")
 	private String city;
 
@@ -41,9 +49,21 @@ public class Company implements Serializable{
 	@Column(name = "PROVINCE")
 	private String province;
 
+	@NotEmpty
 	@Column(name = "COUNTRY")
 	private String country;
 
+	//space trimmer for forms 
+		@InitBinder
+		 public void binder_container(WebDataBinder binder) {
+			 
+			 StringTrimmerEditor space_trimmer = new StringTrimmerEditor(true);
+			 
+			 binder.registerCustomEditor(String.class, space_trimmer);
+			 
+		 }	
+	
+	
 	@Lob
 	@Column(name = "COMPANY_LOGO", columnDefinition = "BLOB")
 	private byte[] companyLogo;
