@@ -12,6 +12,7 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.web.bind.WebDataBinder;
@@ -30,8 +31,10 @@ public class Company implements Serializable{
 
 	@NotEmpty
 	@Column(name = "COMPANY_NAME")
+	@Size(min=1, max=40)
 	private String companyName;
 
+	@NotEmpty
 	@Column(name = "PHONE_NUMBER")
 	private String phoneNumber;
 
@@ -43,9 +46,11 @@ public class Company implements Serializable{
 	@Column(name = "CITY")
 	private String city;
 
+	@NotEmpty
 	@Column(name = "POSTAL_CODE")
 	private String postalCode;
 
+	@NotEmpty
 	@Column(name = "PROVINCE")
 	private String province;
 

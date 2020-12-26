@@ -29,6 +29,6 @@ public interface ApplicationService {
 
 	public ArrayList<Application> retreiveApplicationsByTypeOfJob(String typeOfJob);
 
-	public boolean isApplicationNumberUnique(String applicationNumber);
+	public boolean isApplicationNumberAlreadyExists(String applicationNumber);
 
 }

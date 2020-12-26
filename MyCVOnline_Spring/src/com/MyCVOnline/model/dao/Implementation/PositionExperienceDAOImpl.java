@@ -26,7 +26,7 @@ public class PositionExperienceDAOImpl extends AbstractDAO<CPositionExperience> 
 	@Transactional
 	public void deletePositionExperience(String positionID, String experienceName) {
 		
-		Query query = getSession().createQuery("FROM C_POSITIONS_EXPERIENCES WHERE position_id = :positionID AND experience_name = :experienceName ");
+		Query query = getSession().createQuery("FROM CPositionExperience WHERE position_id = :positionID AND experience_name = :experienceName ");
 		query.setParameter("positionID", positionID);
 		query.setParameter("experienceName", experienceName);
 		
@@ -39,7 +39,7 @@ public class PositionExperienceDAOImpl extends AbstractDAO<CPositionExperience> 
 	@Transactional
 	public CPositionExperience retreivePositionExperience(String positionID, String experienceName) {
 		
-		Query query = getSession().createQuery("FROM C_POSITIONS_EXPERIENCES WHERE position_id = :positionID AND experience_name = :experienceName ");
+		Query query = getSession().createQuery("FROM CPositionExperience WHERE position_id = :positionID AND experience_name = :experienceName ");
 		query.setParameter("positionID", positionID);
 		query.setParameter("experienceName", experienceName);
 		
@@ -51,7 +51,7 @@ public class PositionExperienceDAOImpl extends AbstractDAO<CPositionExperience> 
 	@Transactional
 	public ArrayList<CPositionExperience> retreivePositionExperiencesByPost(String positionID) {
 
-		Query query = getSession().createQuery("FROM C_POSITIONS_EXPERIENCES WHERE position_id = :positionID ");
+		Query query = getSession().createQuery("FROM CPositionExperience WHERE position_id = :positionID ");
 		query.setParameter("positionID", positionID);
 		
 		@SuppressWarnings("unchecked")
@@ -64,9 +64,9 @@ public class PositionExperienceDAOImpl extends AbstractDAO<CPositionExperience> 
 	@Transactional
 	public void updatePositionExperience(CPositionExperience experience) {
 		
-		Query query = getSession().createQuery("UPDATE C_POSITIONS_EXPERIENCES"
-				+ " experience_name = :experienceName "
-				+ " experience_years = :desiredYears "
+		Query query = getSession().createQuery("UPDATE CPositionExperience"
+				+ " experience_name = :experienceName, "
+				+ " experience_years = :desiredYears, "
 				+ " experience_description = :experienceDescription "
 				+ "WHERE position_id = :positionID ");
 			query.setParameter("experienceName", experience.getExperienceName());

@@ -40,7 +40,8 @@ public class CompanyEmployeeServiceImpl implements CompanyEmployeeService {
 		if (entity != null) {
 
 			entity.setCompany(employee.getCompany());
-			entity.setFullName(employee.getFullName());
+			entity.setFirstName(employee.getFirstName());
+			entity.setLastName(employee.getLastName());
 			entity.setUsername(employee.getUsername());
 			entity.setPassword(employee.getPassword());
 

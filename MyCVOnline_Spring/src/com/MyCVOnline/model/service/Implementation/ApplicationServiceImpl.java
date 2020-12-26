@@ -96,11 +96,10 @@ public class ApplicationServiceImpl implements ApplicationService {
 	}
 
 	@Override
-	public boolean isApplicationNumberUnique(String applicationNumber) {
+	public boolean isApplicationNumberAlreadyExists(String applicationNumber) {
 		// TODO Auto-generated method stub
-		Application application = dao.retreiveApplication(applicationNumber);
 
-		return (application == null);
+		return dao.isApplicationNumberAlreadyExists(applicationNumber);
 	}
 
 }

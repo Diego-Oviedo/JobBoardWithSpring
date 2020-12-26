@@ -17,9 +17,15 @@
 <body>
 
 
-Applicants:  <br> 
+Applicants:  <br>
 
-<table>
+	<div class="alert ${alert_status}">
+		<span class="closebtn"
+			onclick="this.parentElement.style.display='none';">&times;</span> <strong>${success}</strong>
+		<strong>${error_editing_applicant}</strong>
+	</div>
+
+	<table>
 
 <thead>
 	<tr>
@@ -57,13 +63,28 @@ Applicants:  <br>
 		<td>${applicant.country}</td>
 		<td>${applicant.aboutYou}</td>
 		<td><img width="200" alt="No picture in record" src="/All-Applicants_Pictures?applicantID=${applicant.applicantID}"/>"/></td>
-		<td><a href="${pageContext.request.contextPath}/Applicants/edit-${applicant.applicantID}-applicant">Edit Applicant</a></td>
+		<td><a href="${pageContext.request.contextPath}/Applicants/view-${applicant.applicantID}-applicant">Edit Applicant</a></td>
 	
 	</tbody>
 	</c:forEach>
 
 
-	<a href="<c:url value='New-Applicant' />">Add New Applicant</a>
+	<a href="${pageContext.request.contextPath}/Applicants/New-Applicant">Add New Applicant</a> 
 
+
+		<script>
+			var close = document.getElementsByClassName("closebtn");
+			var i;
+
+			for (i = 0; i < close.length; i++) {
+				close[i].onclick = function() {
+					var div = this.parentElement;
+					div.style.opacity = "0";
+					setTimeout(function() {
+						div.style.display = "none";
+					}, 600);
+				}
+			}
+		</script>
 </body>
 </html>

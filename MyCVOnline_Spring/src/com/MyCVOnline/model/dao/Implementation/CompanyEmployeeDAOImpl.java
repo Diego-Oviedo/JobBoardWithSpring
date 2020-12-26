@@ -23,7 +23,7 @@ public class CompanyEmployeeDAOImpl extends AbstractDAO<CompanyEmployee> impleme
 	@Transactional
 	public void deleteEmployee(String username) {
 		
-		Query query = getSession().createQuery("FROM COMPANIES_EMPLOYEES WHERE username = :username ");
+		Query query = getSession().createQuery("FROM CompanyEmployee WHERE username = :username ");
 		query.setParameter("username", username);
 		
 		CompanyEmployee employee = (CompanyEmployee)query.uniqueResult();
@@ -36,7 +36,7 @@ public class CompanyEmployeeDAOImpl extends AbstractDAO<CompanyEmployee> impleme
 	@Transactional
 	public CompanyEmployee retreiveEmployee(String username) {
 		
-		Query query = getSession().createQuery("FROM COMPANIES_EMPLOYEES WHERE username = :username ");
+		Query query = getSession().createQuery("FROM CompanyEmployee WHERE username = :username ");
 		query.setParameter("username", username);
 		
 		CompanyEmployee employee = (CompanyEmployee)query.uniqueResult();
@@ -47,12 +47,14 @@ public class CompanyEmployeeDAOImpl extends AbstractDAO<CompanyEmployee> impleme
 	@Transactional
 	public void updateEmployee(CompanyEmployee employee) {
 		
-		Query query = getSession().createQuery("UPDATE COMPANIES_EMPLOYEES"
-												+ "PASSWORD = :password "
-												+ "EMPLOYEE_FULL_NAME = :fullName "
+		Query query = getSession().createQuery("UPDATE CompanyEmployee"
+												+ "PASSWORD = :password, "
+												+ "FISRT_NAME = :firstName, "
+												+ "LAST_NAME = :lastName "
 												+ "WHERE USERNAME = :username");
 		query.setParameter("password", employee.getPassword());
-		query.setParameter("fullName", employee.getFullName());
+		query.setParameter("firstName", employee.getFirstName());
+		query.setParameter("lastName", employee.getLastName());
 		query.setParameter("username", employee.getUsername());
 		
 		query.executeUpdate();

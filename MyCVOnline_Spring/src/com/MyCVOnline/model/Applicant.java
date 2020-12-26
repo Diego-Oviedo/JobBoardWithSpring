@@ -406,7 +406,7 @@ public class Applicant implements Serializable{
 
 
 
-	public void addEducation(ApplicantEducation education) {
+	public void setEducation(ApplicantEducation education) {
 
 		if (educations == null) {
 
@@ -419,7 +419,7 @@ public class Applicant implements Serializable{
 		}
 	}
 
-	public void addExperience(ApplicantExperience experience) {
+	public void setExperience(ApplicantExperience experience) {
 
 		if (experiences == null) {
 
@@ -431,7 +431,7 @@ public class Applicant implements Serializable{
 		}
 	}
 
-	public void addOtherSkill(ApplicantOtherSkill otherSkill) {
+	public void setOtherSkill(ApplicantOtherSkill otherSkill) {
 
 		if (otherSkills == null) {
 
@@ -443,7 +443,7 @@ public class Applicant implements Serializable{
 		}
 	}
 
-	public void addTechSkill(ApplicantTechSkill techSkill) {
+	public void setTechSkill(ApplicantTechSkill techSkill) {
 
 		if (techSkills == null) {
 
@@ -455,7 +455,7 @@ public class Applicant implements Serializable{
 		}
 	}
 
-	public void addApplication(Application application) {
+	public void setApplication(Application application) {
 
 		if (applications == null) {
 
@@ -466,6 +466,7 @@ public class Applicant implements Serializable{
 			applications.add(application);
 		}
 	}
+	
 
 	@Override
 	public String toString() {

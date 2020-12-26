@@ -59,7 +59,7 @@ public class ApplicantEducationDAOImpl extends AbstractDAO<ApplicantEducation> i
 	@Transactional
 	public ArrayList<ApplicantEducation> retreiveApplicantEducationsByID(String applicantID) {
 		
-		Query query = getSession().createQuery("FROM APPLICANTS_EDUCATION WHERE applicant_id = :applicantID ");
+		Query query = getSession().createQuery("FROM ApplicantEducation WHERE applicant_id = :applicantID ");
 		query.setParameter("applicantID", applicantID);
 		
 		@SuppressWarnings("unchecked")

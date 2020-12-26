@@ -24,7 +24,7 @@ public class PositionQualificationDAOImpl extends AbstractDAO<CPositionQualifica
 	@Transactional
 	public void deletePositionQualification(String positionID, String qualificationName) {
 
-		Query query = getSession().createQuery("FROM C_POSITIONS_QUALIFICATIONS WHERE position_id = :positionID AND qualification_name = :qualificationName ");
+		Query query = getSession().createQuery("FROM CPositionQualification WHERE position_id = :positionID AND qualification_name = :qualificationName ");
 		query.setParameter("positionID", positionID);
 		query.setParameter("qualificationName", qualificationName);
 		
@@ -37,7 +37,7 @@ public class PositionQualificationDAOImpl extends AbstractDAO<CPositionQualifica
 	@Transactional
 	public CPositionQualification retreivePositionQualification(String positionID, String qualificationName) {
 		
-		Query query = getSession().createQuery("FROM C_POSITIONS_QUALIFICATIONS WHERE position_id = :positionID AND qualification_name = :qualificationName ");
+		Query query = getSession().createQuery("FROM CPositionQualification WHERE position_id = :positionID AND qualification_name = :qualificationName ");
 		query.setParameter("positionID", positionID);
 		query.setParameter("qualificationName", qualificationName);
 		
@@ -49,7 +49,7 @@ public class PositionQualificationDAOImpl extends AbstractDAO<CPositionQualifica
 	@Transactional
 	public ArrayList<CPositionQualification> retreivePositionQualificationsByPost(String positionID) {
 
-		Query query = getSession().createQuery("FROM C_POSITIONS_QUALIFICATIONS WHERE position_id = :positionID ");
+		Query query = getSession().createQuery("FROM CPositionQualification WHERE position_id = :positionID ");
 		query.setParameter("positionID", positionID);
 		
 		@SuppressWarnings("unchecked")
@@ -62,9 +62,9 @@ public class PositionQualificationDAOImpl extends AbstractDAO<CPositionQualifica
 	@Transactional
 	public void updatePositionQualification(CPositionQualification qualification) {
 
-		Query query = getSession().createQuery("UPDATE C_POSITIONS_QUALIFICATIONS"
-				+ " qualification_name = :qualificationName "
-				+ " desired_years = :desiredYears "
+		Query query = getSession().createQuery("UPDATE CPositionQualification"
+				+ " qualification_name = :qualificationName, "
+				+ " desired_years = :desiredYears, "
 				+ " qualification_description = :qualificationDescription "
 				+ "WHERE position_id = :positionID ");
 			query.setParameter("experienceName", qualification.getQualificationName());

@@ -9,6 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
 @Entity
 @Table(name = "COMPANIES_EMPLOYEES")
@@ -16,14 +21,32 @@ public class CompanyEmployee implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+	@NotEmpty
 	@Column(name = "USERNAME")
 	private String username;
 
+	@NotEmpty
 	@Column(name = "PASSWORD")
 	private String password;
 
-	@Column(name = "EMPLOYEE_FULL_NAME")
-	private String fullName;
+	@NotEmpty
+	@Column(name = "FISRT_NAME")
+	private String firstName;
+	
+	@NotEmpty
+	@Column(name = "LAST_NAME")
+	private String lastName;
+	
+	//space trimmer for forms 
+	@InitBinder
+	 public void binder_container(WebDataBinder binder) {
+		 
+		 StringTrimmerEditor space_trimmer = new StringTrimmerEditor(true);
+		 
+		 binder.registerCustomEditor(String.class, space_trimmer);
+		 
+	 }	
+	
 	
 	@Id
 	@ManyToOne(cascade = { CascadeType.ALL })
@@ -35,50 +58,70 @@ public class CompanyEmployee implements Serializable{
 
 	}
 
-	public CompanyEmployee(Company company, String username, String password, String fullName) {
+	
+	public CompanyEmployee(@NotEmpty String username, @NotEmpty String password, @NotEmpty String firstName,
+			@NotEmpty String lastName, Company company) {
 		super();
-		this.company = company;
 		this.username = username;
 		this.password = password;
-		this.fullName = fullName;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.company = company;
 	}
 
-	public Company getCompany() {
-		return company;
-	}
+
 
 	public String getUsername() {
 		return username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public String getFullName() {
-		return fullName;
-	}
-
-	public void setCompany(Company company) {
-		this.company = company;
 	}
 
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public String getFirstName() {
+		return firstName;
 	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 
 	@Override
 	public String toString() {
-		return "CompanyEmployee [company=" + company + ", username=" + username + ", password=" + password
-				+ ", fullName=" + fullName + "]";
+		return "CompanyEmployee [username=" + username + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", company=" + company + "]";
 	}
+
+	
 
 }

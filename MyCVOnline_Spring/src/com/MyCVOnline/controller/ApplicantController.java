@@ -19,6 +19,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -100,7 +101,7 @@ public class ApplicantController {
 	    	
 	        Applicant applicant = new Applicant();
 	        model.addAttribute("applicant", applicant);
-	        model.addAttribute("edit", false);
+
 	        return "registration"; 
 	    }
 	      
@@ -111,10 +112,9 @@ public class ApplicantController {
 	            ModelMap model) {
 	    	
 	        if (result.hasErrors()) {
-	        	
+	        
 	        	model.addAttribute("error_adding_applicant","ERROR: " + result.getFieldError()); 
 	            
-	        	
 	            return "registration";
 	            }
  	        
@@ -134,9 +134,23 @@ public class ApplicantController {
      	        model.addAttribute("success", "Applicant " + applicant.getFirstName() + " " + applicant.getLastName()+ " registered successfully");
      	        return "success";
 	    }
-	      
+	        
 	    
-	    
+	    // This method will provide the medium to view the existing applicant.     
+	    @RequestMapping(value = { "/view-{applicantID}-applicant" }, method = RequestMethod.GET)
+	    public String viewApplicant(@PathVariable String applicantID, ModelMap model) {
+	    	Applicant applicant = applicant_service.retreiveApplicant(applicantID);
+	        model.addAttribute("applicant", applicant);
+	        model.addAttribute("edit", true);
+	        
+	        ArrayList<ApplicantEducation> educations = applicant_education_service.retreiveApplicantEducationsByID(applicantID);
+	        model.addAttribute("applicant_educations", educations);
+	        
+	        ArrayList<ApplicantExperience> experiences = applicant_experience_service.retreiveApplicantExperiencesByID(applicantID);
+	        model.addAttribute("applicant_experiences", experiences);
+	        
+	        return "Applicant";
+	    }
 	    
 	    
 	    
@@ -145,8 +159,15 @@ public class ApplicantController {
 	    public String editApplicant(@PathVariable String applicantID, ModelMap model) {
 	    	Applicant applicant = applicant_service.retreiveApplicant(applicantID);
 	        model.addAttribute("applicant", applicant);
-	        model.addAttribute("edit", true);
-	        return "Applicant";
+	        
+	        ArrayList<ApplicantEducation> educations = applicant_education_service.retreiveApplicantEducationsByID(applicantID);
+	        model.addAttribute("applicant_educations", educations);
+	        
+	        ArrayList<ApplicantExperience> experiences = applicant_experience_service.retreiveApplicantExperiencesByID(applicantID);
+	        model.addAttribute("applicant_experiences", experiences);
+	        
+	        
+	        return "Applicant_edit";
 	    }
 	      
 	    
@@ -157,22 +178,23 @@ public class ApplicantController {
 	    public String updateApplicant(@Valid Applicant applicant, BindingResult result,
 	            ModelMap model, @PathVariable String applicantID) {
 	  
+	    	
+	    	//if the userame to edit already exists and is different that the previous one -> you will have to choose another oner 
+	        if(applicant_service.isApplicantUsernameAlreadyExists(applicant.getUsername()) && !applicant.getUsername().equalsIgnoreCase(applicant_service.retreiveApplicant(applicant.getApplicantID()).getUsername())){
+	        	
+	        	model.addAttribute("alert_status", "warning");
+		    	model.addAttribute("error_editing_applicant", "Username already exists");
+	            
+	            return "Applicant_edit";
+	        	}
+	    	
 	        if (result.hasErrors()) {
 	        	
-	        	model.addAttribute("error_editing_applicant","ERROR: " + result.getFieldError()); 
-	            return "Applicant";
+	        	model.addAttribute("alert_status", "danger");
+	        	model.addAttribute("error_editing_applicant","Error when filling fileds"); 
+	            return "Applicant_edit";
 	        }
 	        
-	        
-	        //if the userame to edit already exists and is different that the previous one -> you will have to choose another oner 
-	        if(applicant_service.isApplicantUsernameAlreadyExists(applicant.getUsername())&& !applicant.getUsername().equalsIgnoreCase(applicant.getUsername())){
-	        	
-	            FieldError IDError =new FieldError("applicant","username",messageSource.getMessage("non.unique.ID", new String[]{applicant.getUsername()}, null));
-	            result.addError(IDError);
-	            
-	            return "registration";
-	        	}
-	  
 	        if(!applicant_service.isApplicantIDAlreadyExists(applicantID)){
 	            
 	            model.addAttribute("error_editing_applicant","The Applicant " + applicant.getFirstName() + " " + applicant.getLastName()+ " haven't been previously registered\n Please register as a new applicant.\n "); 
@@ -185,9 +207,10 @@ public class ApplicantController {
 	        	applicant_service.updateApplicant(applicant);
         		  
         	}
-
-	        model.addAttribute("success", "Applicant " + applicant.getFirstName() + " " + applicant.getLastName()+ " updated successfully");
-	        return "success";
+	        
+	        model.addAttribute("alert_status", "success");
+	        model.addAttribute("success", "Applicant successfully updated!");
+	        return "Applicant_edit";
 	    }
 	          
 	     // This method will delete an applicant by it's ID value.     
@@ -196,11 +219,67 @@ public class ApplicantController {
 	    	
 	    	applicant_service.deleteApplicant(applicantID);
 	        
+	    	model.addAttribute("alert_status", "info");
 	    	model.addAttribute("success", "Applicant successfully deleted!");
-	        return "success";
+	    	
+	    	ArrayList<Applicant> applicants = applicant_service.retreiveApplicants();
+	        model.addAttribute("applicants", applicants);
+	        
+	        return "All-Applicants";
 	    	
 	    }
+	    
+	    /*
+	    //Form submission by POST request to save an applicant's experience in database. It also validates the user input     
+	    @RequestMapping(value = { "/edit-{applicantID}-applicant" }, method = RequestMethod.POST)
+	    public String saveApplicant_education(@PathVariable String applicantID ,@Valid ApplicantEducation education, BindingResult result,
+	            ModelMap model) {
+	    	
+	    		Applicant applicant = applicant_service.retreiveApplicant(applicantID);
+	    	
+	    	
+	        if (result.hasErrors()) {
+	        
 	 
+	        	model.addAttribute("alert_status", "danger");
+	        	model.addAttribute("error_adding_applicant_education","ERROR: " + result.getFieldError());
+	            return "Applicant_edit";
+	            }
+	        	else if(!result.hasErrors()) {
+	        		 
+	        		applicant_education_service.insertApplicantEducation(applicant, education);
+
+	        	}
+	        	
+		        model.addAttribute("alert_status", "success");
+		        model.addAttribute("success", "Applicant successfully added!");
+    	        return "Applicant_edit";
+	    }
+	    
+	    //Form submission by POST request to edit an applicant's experience in database. It also validates the user input     
+	    @RequestMapping(value = { "/edit-{applicantID}-applicant" }, method = RequestMethod.POST)
+	    public String editApplicant_education(@Valid ApplicantEducation education, BindingResult result,
+	            ModelMap model) {
+	    	
+	    	
+	        if (result.hasErrors()) {
+	        
+	 
+	        	model.addAttribute("alert_status", "danger");
+	        	model.addAttribute("error_editing_applicant_education","ERROR: " + result.getFieldError());
+	            return "Applicant_edit";
+	            }
+	        	else if(!result.hasErrors()) {
+	        		
+	        		applicant_education_service.updateApplicantEducation(education);
+	        		  
+	        	}
+	        	
+		        model.addAttribute("alert_status", "success");
+		        model.addAttribute("success", "Applicant successfully updated!");
+    	        return "Applicant_edit";
+	    }
+	 		*/
 	 
 	 
 }

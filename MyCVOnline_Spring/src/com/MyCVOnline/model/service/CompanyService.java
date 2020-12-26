@@ -22,6 +22,8 @@ public interface CompanyService {
 
 	public ArrayList<Company> retreiveCompanies();
 
-	public boolean isCompanyIDUnique(String companyID);
+	public boolean isCompanyIDAlreadyExists(String companyID);
+	
+	public boolean isCompanyNameAlreadyExists(String companyName);
 
 }

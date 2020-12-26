@@ -11,6 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
 @Entity
 @Table(name = "COMPANIES_POSITIONS")
@@ -23,30 +28,47 @@ public class CompanyPosition implements Serializable{
 	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private String positionID;
 
+	@NotEmpty
 	@Column(name = "JOB_TITLE")
 	private String jobTitle;
 
+	@NotEmpty
 	@Column(name = "JOB_DESCRIPTION")
 	private String jobDescription;
 
+	@NotEmpty
 	@Column(name = "JOB_DOMAIN")
 	private String jobDomain;
 
+	@NotEmpty
 	@Column(name = "TYPE_OF_JOB")
 	private String typeOfJob;
 
+	@NotEmpty
 	@Column(name = "AVAILABILITY")
 	private String availability;
 
+	@NotEmpty
 	@Column(name = "OFFER_SALARY")
 	private String offerSalary;
 
+	@NotEmpty
 	@Column(name = "ADDITIONAL_COMPENSATION")
 	private String additionalCompensation;
 
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "COMPANY_ID")
 	private Company company;
+	
+	//space trimmer for forms 
+	@InitBinder
+	 public void binder_container(WebDataBinder binder) {
+		 
+		 StringTrimmerEditor space_trimmer = new StringTrimmerEditor(true);
+		 
+		 binder.registerCustomEditor(String.class, space_trimmer);
+		 
+	 }		
 
 	@OneToMany(mappedBy = "position", cascade = { CascadeType.ALL })
 	private List<CPositionExperience> experiences;

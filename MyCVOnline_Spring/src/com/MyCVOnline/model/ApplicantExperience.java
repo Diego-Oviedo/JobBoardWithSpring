@@ -2,6 +2,7 @@ package com.MyCVOnline.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,13 +36,13 @@ public class ApplicantExperience implements Serializable{
 	@NotEmpty
 	private String companyName;
 	
-	@DateTimeFormat(pattern = "DD/MM/YYYY")
+	@DateTimeFormat(pattern = "YYYY/MM/DD")
 	@Type(type = "org.hibernate.type.LocalDateTimeType")
 	@Column(name = "START_DATE", nullable = false)
 	@NotEmpty
 	private LocalDateTime startDate;
 	
-	@DateTimeFormat(pattern = "DD/MM/YYYY")
+	@DateTimeFormat(pattern = "YYYY/MM/DD")
 	@Type(type = "org.hibernate.type.LocalDateTimeType")
 	@Column(name = "END_DATE")
 	private LocalDateTime endDate;
@@ -73,8 +74,9 @@ public class ApplicantExperience implements Serializable{
 		super();
 	}
 
-	public ApplicantExperience(String experienceTitle, String companyName, LocalDateTime startDate, LocalDateTime endDate,
-			String description, byte[] expLogo, Applicant applicant) {
+	public ApplicantExperience(@NotEmpty String experienceTitle, @NotEmpty String companyName,
+			@NotEmpty LocalDateTime startDate, LocalDateTime endDate, String description, byte[] expLogo,
+			Applicant applicant) {
 		super();
 		this.experienceTitle = experienceTitle;
 		this.companyName = companyName;
@@ -84,8 +86,6 @@ public class ApplicantExperience implements Serializable{
 		this.expLogo = expLogo;
 		this.applicant = applicant;
 	}
-
-	
 
 	public String getExperienceTitle() {
 		return experienceTitle;
@@ -143,15 +143,17 @@ public class ApplicantExperience implements Serializable{
 		this.applicant = applicant;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
 	@Override
 	public String toString() {
-		return "ApplicantExperience \nexperienceTitle: " + experienceTitle + "\ncompanyName: " + companyName
-				+ "\nstartDate: " + startDate + "\nendDate: " + endDate + "\ndescription: " + description
-				+ "\napplicant: " + applicant;
+		return "ApplicantExperience [experienceTitle=" + experienceTitle + ", companyName=" + companyName
+				+ ", startDate=" + startDate + ", endDate=" + endDate + ", description=" + description + ", expLogo="
+				+ Arrays.toString(expLogo) + ", applicant=" + applicant + "]";
 	}
+
+	
+	
+
+	
 
 }

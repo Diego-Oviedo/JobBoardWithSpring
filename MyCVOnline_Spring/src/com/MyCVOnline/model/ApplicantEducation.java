@@ -2,6 +2,7 @@ package com.MyCVOnline.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -36,12 +37,12 @@ public class ApplicantEducation implements Serializable{
 	private String schoolName;
 	
 	@NotEmpty
-	@DateTimeFormat(pattern = "DD/MM/YYYY")
+	@DateTimeFormat(pattern = "YYYY/MM/DD")
 	@Type(type = "org.hibernate.type.LocalDateTimeType")
 	@Column(name = "START_DATE", nullable = false)
 	private LocalDateTime startDate;
 
-	@DateTimeFormat(pattern = "DD/MM/YYYY")
+	@DateTimeFormat(pattern = "YYYY/MM/DD")
 	@Type(type = "org.hibernate.type.LocalDateTimeType")
 	@Column(name = "END_DATE")
 	private LocalDateTime endDate;
@@ -74,8 +75,10 @@ public class ApplicantEducation implements Serializable{
 
 	}
 
-	public ApplicantEducation(String educationTitle, String schoolName, LocalDateTime startDate, LocalDateTime endDate,
-			String description, byte[] eduLogo, Applicant applicant) {
+
+	public ApplicantEducation(@NotEmpty String educationTitle, @NotEmpty String schoolName,
+			@NotEmpty LocalDateTime startDate, LocalDateTime endDate, String description, byte[] eduLogo,
+			Applicant applicant) {
 		super();
 		this.educationTitle = educationTitle;
 		this.schoolName = schoolName;
@@ -86,73 +89,85 @@ public class ApplicantEducation implements Serializable{
 		this.applicant = applicant;
 	}
 
-	
 
 	public String getEducationTitle() {
 		return educationTitle;
 	}
 
+
 	public void setEducationTitle(String educationTitle) {
 		this.educationTitle = educationTitle;
 	}
+
 
 	public String getSchoolName() {
 		return schoolName;
 	}
 
+
 	public void setSchoolName(String schoolName) {
 		this.schoolName = schoolName;
 	}
+
 
 	public LocalDateTime getStartDate() {
 		return startDate;
 	}
 
+
 	public void setStartDate(LocalDateTime startDate) {
 		this.startDate = startDate;
 	}
+
 
 	public LocalDateTime getEndDate() {
 		return endDate;
 	}
 
+
 	public void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
 	}
+
 
 	public String getDescription() {
 		return description;
 	}
 
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 
 	public byte[] getEduLogo() {
 		return eduLogo;
 	}
 
+
 	public void setEduLogo(byte[] eduLogo) {
 		this.eduLogo = eduLogo;
 	}
+
 
 	public Applicant getApplicant() {
 		return applicant;
 	}
 
+
 	public void setApplicant(Applicant applicant) {
 		this.applicant = applicant;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
 	@Override
 	public String toString() {
-		return "ApplicantEducation \neducationTitle: " + educationTitle + "\nschoolName: " + schoolName
-				+ "\nstartDate: " + startDate + "\nendDate: " + endDate + "\ndescription: " + description
-				+ "\napplicant: " + applicant;
+		return "ApplicantEducation [educationTitle=" + educationTitle + ", schoolName=" + schoolName + ", startDate="
+				+ startDate + ", endDate=" + endDate + ", description=" + description + ", eduLogo="
+				+ Arrays.toString(eduLogo) + ", applicant=" + applicant + "]";
 	}
 
+
+
+	
 }

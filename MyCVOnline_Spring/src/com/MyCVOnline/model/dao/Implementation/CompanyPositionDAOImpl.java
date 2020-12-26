@@ -26,7 +26,7 @@ public class CompanyPositionDAOImpl extends AbstractDAO<CompanyPosition> impleme
 	@Transactional
 	public void deleteJobPosition(String positionID) {
 		
-		Query query = getSession().createQuery("FROM COMPANIES_POSITIONS WHERE position_id = :positionID ");
+		Query query = getSession().createQuery("FROM CompanyPosition WHERE position_id = :positionID ");
 		query.setParameter("positionID", positionID);
 
 		CompanyPosition position = (CompanyPosition)query.uniqueResult();
@@ -37,7 +37,7 @@ public class CompanyPositionDAOImpl extends AbstractDAO<CompanyPosition> impleme
 	@Transactional
 	public CompanyPosition retreiveJobPosition(String positionID) {
 		
-		Query query = getSession().createQuery("FROM COMPANIES_POSITIONS WHERE position_id = :positionID ");
+		Query query = getSession().createQuery("FROM CompanyPosition WHERE position_id = :positionID ");
 		query.setParameter("positionID", positionID);
 
 		CompanyPosition position = (CompanyPosition)query.uniqueResult();
@@ -47,14 +47,14 @@ public class CompanyPositionDAOImpl extends AbstractDAO<CompanyPosition> impleme
 
 	@Transactional
 	public void updateJobPosition(CompanyPosition position) {
-		Query query = getSession().createQuery("UPDATE COMPANIES_POSITIONS"
-											+ "job_title = :jobTitle"
-											+ "job_description = :jobDescription"
-											+ "job_domain = :jobDomain"
-											+ "type_of_job = :typeOfJob"
-											+ "availability = :availability"
-											+ "offer_salary = :offerSalary"
-											+ "additional_compensation = :additionalCompensation"
+		Query query = getSession().createQuery("UPDATE CompanyPosition "
+											+ "job_title = :jobTitle, "
+											+ "job_description = :jobDescription, "
+											+ "job_domain = :jobDomain, "
+											+ "type_of_job = :typeOfJob, "
+											+ "availability = :availability, "
+											+ "offer_salary = :offerSalary, "
+											+ "additional_compensation = :additionalCompensation, "
 											+ "WHERE position_id = :positionID ");
 				query.setParameter("jobTitle", position.getPositionID());
 				query.setParameter("jobDescription", position.getJobDescription());
@@ -82,7 +82,7 @@ public class CompanyPositionDAOImpl extends AbstractDAO<CompanyPosition> impleme
 	@Transactional
 	public ArrayList<CompanyPosition> retreiveJobPositionsByCompanyID(String companyID) {
 		
-		Query query = getSession().createQuery("FROM COMPANIES_POSITIONS WHERE company_id IN ( company_id FROM COMPANIES c WHERE c.company_id :companyID ) ");
+		Query query = getSession().createQuery("FROM CompanyPosition WHERE company_id IN ( company_id FROM Company c WHERE c.company_id :companyID ) ");
 		query.setParameter("companyID", companyID);
 		
 		@SuppressWarnings("unchecked")
@@ -94,7 +94,7 @@ public class CompanyPositionDAOImpl extends AbstractDAO<CompanyPosition> impleme
 	@Transactional
 	public ArrayList<CompanyPosition> retreiveJobPositionsByCompanyName(String companyName) {
 		
-		Query query = getSession().createQuery("FROM COMPANIES_POSITIONS WHERE company_id IN ( company_id FROM COMPANIES c WHERE c.company_name LIKE '%:companyName%' ) ");
+		Query query = getSession().createQuery("FROM CompanyPosition WHERE company_id IN ( company_id FROM Company c WHERE c.company_name LIKE '%:companyName%' ) ");
 		query.setParameter("companyName", companyName);
 		
 		@SuppressWarnings("unchecked")
@@ -106,7 +106,7 @@ public class CompanyPositionDAOImpl extends AbstractDAO<CompanyPosition> impleme
 	@Transactional
 	public ArrayList<CompanyPosition> retreiveJobPositionsByCity(String city) {
 
-		Query query = getSession().createQuery("FROM COMPANIES_POSITIONS WHERE company_id IN ( company_id FROM COMPANIES c WHERE c.city LIKE '%:city%' ) ");
+		Query query = getSession().createQuery("FROM CompanyPosition WHERE company_id IN ( company_id FROM Company c WHERE c.city LIKE '%:city%' ) ");
 		query.setParameter("city", city);
 		
 		@SuppressWarnings("unchecked")
@@ -118,7 +118,7 @@ public class CompanyPositionDAOImpl extends AbstractDAO<CompanyPosition> impleme
 	@Transactional
 	public ArrayList<CompanyPosition> retreiveJobPositionsByCountry(String country) {
 
-		Query query = getSession().createQuery("FROM COMPANIES_POSITIONS WHERE company_id IN ( company_id FROM COMPANIES c WHERE c.country LIKE '%:country%' ) ");
+		Query query = getSession().createQuery("FROM CompanyPosition WHERE company_id IN ( company_id FROM Company c WHERE c.country LIKE '%:country%' ) ");
 		query.setParameter("country", country);
 		
 		@SuppressWarnings("unchecked")
@@ -130,7 +130,7 @@ public class CompanyPositionDAOImpl extends AbstractDAO<CompanyPosition> impleme
 	@Transactional
 	public ArrayList<CompanyPosition> retreiveJobPositionsByDomain(String domain) {
 
-		Query query = getSession().createQuery("FROM COMPANIES_POSITIONS WHERE company_id IN ( company_id FROM COMPANIES c WHERE c.domain LIKE '%:domain%' ) ");
+		Query query = getSession().createQuery("FROM CompanyPosition WHERE company_id IN ( company_id FROM Company c WHERE c.domain LIKE '%:domain%' ) ");
 		query.setParameter("domain", domain);
 		
 		@SuppressWarnings("unchecked")
@@ -142,7 +142,7 @@ public class CompanyPositionDAOImpl extends AbstractDAO<CompanyPosition> impleme
 	@Transactional
 	public ArrayList<CompanyPosition> retreiveJobPositionsByTypeOfJob(String typeOfJob) {
 
-		Query query = getSession().createQuery("FROM COMPANIES_POSITIONS WHERE type_of_job LIKE '%:typeOfJob%' ");
+		Query query = getSession().createQuery("FROM CompanyPosition WHERE type_of_job LIKE '%:typeOfJob%' ");
 		query.setParameter("typeOfJob", typeOfJob);
 		
 		@SuppressWarnings("unchecked")

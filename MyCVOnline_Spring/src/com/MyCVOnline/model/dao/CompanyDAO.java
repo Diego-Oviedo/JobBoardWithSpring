@@ -23,5 +23,9 @@ public interface CompanyDAO {
 	public void updateCompany(Company company);
 
 	public ArrayList<Company> retreiveCompanies();
+	
+	public boolean isCompanyIDAlreadyExists(String companyID);
+	
+	public boolean isCompanyNameAlreadyExists(String companyName);
 
 }

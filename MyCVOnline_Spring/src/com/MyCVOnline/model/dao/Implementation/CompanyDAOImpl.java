@@ -11,6 +11,8 @@ import org.hibernate.Criteria;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.MyCVOnline.model.Applicant;
 import com.MyCVOnline.model.Company;
 import com.MyCVOnline.model.dao.AbstractDAO;
 import com.MyCVOnline.model.dao.CompanyDAO;
@@ -20,7 +22,19 @@ public class CompanyDAOImpl extends AbstractDAO<Company>  implements CompanyDAO 
 
 	@Transactional
 	public void insertCompany(Company company) {
-
+		
+		String ID = companyIDGenerator();
+		
+		company.setCompanyID(ID);
+		
+		save(company);
+	}
+	
+	
+	// This method will handle a creation and a non-unique ID validation.  
+	// Logic: If the ID created already exists -> add a digit at the end of the ID 
+	public String companyIDGenerator() {
+		
 		final String PREFIX = "CMPNY"; 
 		int CMPNY_number = retreiveCompanies().size()+1;
 		String digits = null ;
@@ -33,7 +47,11 @@ public class CompanyDAOImpl extends AbstractDAO<Company>  implements CompanyDAO 
 			
 			ID = PREFIX + digits + CMPNY_number;
 			
-			company.setCompanyID(ID);
+			if(isCompanyIDAlreadyExists(ID)) {
+				
+				ID = PREFIX + digits + (CMPNY_number+1);
+			}
+			
 			
 		}else if (CMPNY_number <= 99) {
 			
@@ -41,7 +59,10 @@ public class CompanyDAOImpl extends AbstractDAO<Company>  implements CompanyDAO 
 			
 			ID = PREFIX + digits + CMPNY_number;
 			
-			company.setCompanyID(ID);
+			if(isCompanyIDAlreadyExists(ID)) {
+				
+				ID = PREFIX + digits + (CMPNY_number+1);
+			}
 			
 		}else if (CMPNY_number <= 999) {
 			
@@ -49,7 +70,11 @@ public class CompanyDAOImpl extends AbstractDAO<Company>  implements CompanyDAO 
 			
 			ID = PREFIX + digits + CMPNY_number;
 			
-			company.setCompanyID(ID);
+			if(isCompanyIDAlreadyExists(ID)) {
+				
+				ID = PREFIX + digits + (CMPNY_number+1);
+			}
+			
 			
 		}else if (CMPNY_number <= 9999) {
 			
@@ -57,20 +82,24 @@ public class CompanyDAOImpl extends AbstractDAO<Company>  implements CompanyDAO 
 			
 			ID = PREFIX + digits + CMPNY_number;
 			
-			company.setCompanyID(ID);
+			if(isCompanyIDAlreadyExists(ID)) {
+				
+				ID = PREFIX + digits + (CMPNY_number+1);
+			}
 			
 			
-		}else if (CMPNY_number >= 10000) {
-			
+		}else if (CMPNY_number >= 10000) {	
 			
 			ID = PREFIX + CMPNY_number;
 			
-			company.setCompanyID(ID);
+			if(isCompanyIDAlreadyExists(ID)) {
+				
+				ID = PREFIX + digits + (CMPNY_number+1);
+			}
 			
 		}
 		
-		
-		save(company);
+		return ID;
 	}
 
 	@Transactional
@@ -193,5 +222,21 @@ public class CompanyDAOImpl extends AbstractDAO<Company>  implements CompanyDAO 
 		
 		return company;
 	}
+	
+	@Transactional
+	public boolean isCompanyIDAlreadyExists(String companyID) {
+		// TODO Auto-generated method stub
+		Company company = (Company)getByID(companyID);
+		
+		return (company != null);
+	}
 
+
+	@Transactional
+	public boolean isCompanyNameAlreadyExists(String companyName) {
+		// TODO Auto-generated method stub
+		Company company = retreiveCompanyByName(companyName);
+		
+		return (company != null);
+	}
 }

@@ -29,5 +29,7 @@ public interface ApplicationDAO {
 	public ArrayList<Application> retreiveApplicationsByCountry(String country);
 
 	public ArrayList<Application> retreiveApplicationsByTypeOfJob(String typeOfJob);
+	
+	public boolean isApplicationNumberAlreadyExists(String applicationNumber);
 
 }

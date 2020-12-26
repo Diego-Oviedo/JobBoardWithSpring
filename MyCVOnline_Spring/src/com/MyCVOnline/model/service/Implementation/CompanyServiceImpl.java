@@ -79,11 +79,17 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public boolean isCompanyIDUnique(String companyID) {
+	public boolean isCompanyIDAlreadyExists(String companyID) {
 		// TODO Auto-generated method stub
-		Company company = dao.retreiveCompany(companyID);
-
-		return (company == null);
+		
+		return dao.isCompanyIDAlreadyExists(companyID);
 	}
+
+	@Override
+	public boolean isCompanyNameAlreadyExists(String companyName) {
+		// TODO Auto-generated method stub
+		return dao.isCompanyNameAlreadyExists(companyName);
+	}
+	
 
 }
