@@ -29,22 +29,19 @@ public class ApplicantExperience implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "EXPERIENCE_TITLE")
-	@NotEmpty
 	private String experienceTitle;
 
 	@Column(name = "COMPANY_NAME")
-	@NotEmpty
 	private String companyName;
 	
-	@DateTimeFormat(pattern = "YYYY/MM/DD")
+	@DateTimeFormat(pattern = "YYYY-MM-DD")
 	@Type(type = "org.hibernate.type.LocalDateTimeType")
 	@Column(name = "START_DATE", nullable = false)
-	@NotEmpty
 	private LocalDateTime startDate;
 	
-	@DateTimeFormat(pattern = "YYYY/MM/DD")
+	@DateTimeFormat(pattern = "YYYY-MM-DD")
 	@Type(type = "org.hibernate.type.LocalDateTimeType")
-	@Column(name = "END_DATE")
+	@Column(name = "END_DATE", nullable = false)
 	private LocalDateTime endDate;
 
 	@Column(name = "DESCRIPTION")
@@ -74,8 +71,8 @@ public class ApplicantExperience implements Serializable{
 		super();
 	}
 
-	public ApplicantExperience(@NotEmpty String experienceTitle, @NotEmpty String companyName,
-			@NotEmpty LocalDateTime startDate, LocalDateTime endDate, String description, byte[] expLogo,
+	public ApplicantExperience(String experienceTitle, String companyName,
+			 LocalDateTime startDate, LocalDateTime endDate, String description, byte[] expLogo,
 			Applicant applicant) {
 		super();
 		this.experienceTitle = experienceTitle;

@@ -36,7 +36,7 @@ public class ApplicantEducation implements Serializable{
 	@Column(name = "SCHOOL_NAME")
 	private String schoolName;
 	
-	@NotEmpty
+
 	@DateTimeFormat(pattern = "YYYY/MM/DD")
 	@Type(type = "org.hibernate.type.LocalDateTimeType")
 	@Column(name = "START_DATE", nullable = false)

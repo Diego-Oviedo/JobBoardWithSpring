@@ -14,7 +14,7 @@ body {
 .header {
   padding: 80px;
   text-align: center;
-  background-image: linear-gradient(to right top, #103964, #004a72, #005b7d, #006b85, #007c8b, #008191, #008697, #008b9d, #0085a5, #127dab, #3674ac, #526aa8);
+  background-image: linear-gradient(to right top, #8c0000, #971202, #a12002, #ac2b02, #b63601, #bb4400, #c05200, #c45e00, #c46f00, #c28000, #bf9000, #ba9f00);
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
@@ -309,7 +309,7 @@ body {
 }
 
 /* Add a color to the delete button */
-.deletebtn a{
+.deletebtn a, .delete_button a{
   text-decoration: none;
   color: white;
 }

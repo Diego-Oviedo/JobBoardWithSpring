@@ -23,13 +23,10 @@ public class ApplicantTechSkillDAOImpl extends AbstractDAO<ApplicantTechSkill> i
 
 	@Transactional
 	public void deleteApplicantTechSkill(String applicantID, String skillName) {
-		Query query = getSession().createQuery("FROM ApplicantTechSkill WHERE applicant_id = :applicantID AND skill_name = :skillName ");
+		Query query = getSession().createQuery("DELETE FROM ApplicantTechSkill WHERE applicant_id = :applicantID AND skill_name = :skillName ");
 		query.setParameter("applicantID", applicantID);
 		query.setParameter("skillName", skillName);
-		
-		ApplicantTechSkill techSkill = (ApplicantTechSkill)query.uniqueResult();
-		
-		delete(techSkill);
+
 		
 	}
 

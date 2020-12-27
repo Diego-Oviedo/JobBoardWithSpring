@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -65,6 +66,8 @@ public class ApplicantController {
 	 @Autowired
 	 MessageSource messageSource;
 
+	 String action = "";
+	 
 	
 	 // This method will list all existing employees.    
 	 	@RequestMapping(value = { "/All-Applicants" }, method = RequestMethod.GET)
@@ -157,14 +160,18 @@ public class ApplicantController {
 	     // This method will provide the medium to update an existing applicant.     
 	    @RequestMapping(value = { "/edit-{applicantID}-applicant" }, method = RequestMethod.GET)
 	    public String editApplicant(@PathVariable String applicantID, ModelMap model) {
+	    	
 	    	Applicant applicant = applicant_service.retreiveApplicant(applicantID);
 	        model.addAttribute("applicant", applicant);
 	        
+	        model.addAttribute("education", new ApplicantEducation()); 
+	        model.addAttribute("experience", new ApplicantExperience());
+	        
 	        ArrayList<ApplicantEducation> educations = applicant_education_service.retreiveApplicantEducationsByID(applicantID);
 	        model.addAttribute("applicant_educations", educations);
-	        
 	        ArrayList<ApplicantExperience> experiences = applicant_experience_service.retreiveApplicantExperiencesByID(applicantID);
 	        model.addAttribute("applicant_experiences", experiences);
+
 	        
 	        
 	        return "Applicant_edit";
@@ -173,7 +180,6 @@ public class ApplicantController {
 	    
 	     // This method will be called on form submission, handling POST request for
 	     // updating applicant in database. It also validates the user input
-	     
 	    @RequestMapping(value = { "/edit-{applicantID}-applicant" }, method = RequestMethod.POST)
 	    public String updateApplicant(@Valid Applicant applicant, BindingResult result,
 	            ModelMap model, @PathVariable String applicantID) {
@@ -182,17 +188,31 @@ public class ApplicantController {
 	    	//if the userame to edit already exists and is different that the previous one -> you will have to choose another oner 
 	        if(applicant_service.isApplicantUsernameAlreadyExists(applicant.getUsername()) && !applicant.getUsername().equalsIgnoreCase(applicant_service.retreiveApplicant(applicant.getApplicantID()).getUsername())){
 	        	
-	        	model.addAttribute("alert_status", "warning");
+	        	model.addAttribute("alert_status", "warning_edit_applicant");
 		    	model.addAttribute("error_editing_applicant", "Username already exists");
 	            
-	            return "Applicant_edit";
+		    	editApplicant(applicantID,model);
+
+		        return "Applicant_edit";
 	        	}
 	    	
 	        if (result.hasErrors()) {
 	        	
-	        	model.addAttribute("alert_status", "danger");
+	        	model.addAttribute("alert_status", "danger_edit_applicant");
 	        	model.addAttribute("error_editing_applicant","Error when filling fileds"); 
-	            return "Applicant_edit";
+	            
+	        	ArrayList<ApplicantEducation> educations = applicant_education_service.retreiveApplicantEducationsByID(applicantID);
+		        model.addAttribute("applicant_educations", educations);    
+		        
+		        ArrayList<ApplicantExperience> experiences = applicant_experience_service.retreiveApplicantExperiencesByID(applicantID);
+		        model.addAttribute("applicant_experiences", experiences);
+		        
+		        model.addAttribute("education", new ApplicantEducation()); 
+		        model.addAttribute("experience", new ApplicantExperience());
+	        	
+	        	//editApplicant(applicantID,model);
+
+		        return "Applicant_edit";
 	        }
 	        
 	        if(!applicant_service.isApplicantIDAlreadyExists(applicantID)){
@@ -205,13 +225,21 @@ public class ApplicantController {
 	        else if(!result.hasErrors()) {
        		 
 	        	applicant_service.updateApplicant(applicant);
+	        	model.addAttribute("alert_status", "success_edit_applicant");
+		        model.addAttribute("success", "Applicant successfully updated!");
+		        
+		        editApplicant(applicantID,model);
+
+		        return "Applicant_edit";
         		  
         	}
 	        
-	        model.addAttribute("alert_status", "success");
-	        model.addAttribute("success", "Applicant successfully updated!");
+	        editApplicant(applicantID,model);
+	        
 	        return "Applicant_edit";
 	    }
+	    
+	    
 	          
 	     // This method will delete an applicant by it's ID value.     
 	    @RequestMapping(value = { "/delete-{applicantID}-applicant" }, method = RequestMethod.GET)
@@ -219,7 +247,7 @@ public class ApplicantController {
 	    	
 	    	applicant_service.deleteApplicant(applicantID);
 	        
-	    	model.addAttribute("alert_status", "info");
+	    	model.addAttribute("alert_status", "info_edit_applicant");
 	    	model.addAttribute("success", "Applicant successfully deleted!");
 	    	
 	    	ArrayList<Applicant> applicants = applicant_service.retreiveApplicants();
@@ -229,57 +257,68 @@ public class ApplicantController {
 	    	
 	    }
 	    
-	    /*
+	    
 	    //Form submission by POST request to save an applicant's experience in database. It also validates the user input     
-	    @RequestMapping(value = { "/edit-{applicantID}-applicant" }, method = RequestMethod.POST)
-	    public String saveApplicant_education(@PathVariable String applicantID ,@Valid ApplicantEducation education, BindingResult result,
+	    @RequestMapping(value = { "/add_applicant_experience-{applicantID}" }, method = RequestMethod.POST)
+	    public String saveApplicant_experience(@PathVariable String applicantID ,@Valid ApplicantExperience experience, BindingResult result,
 	            ModelMap model) {
 	    	
 	    		Applicant applicant = applicant_service.retreiveApplicant(applicantID);
 	    	
 	    	
 	        if (result.hasErrors()) {
-	        
+	        	
 	 
 	        	model.addAttribute("alert_status", "danger");
-	        	model.addAttribute("error_adding_applicant_education","ERROR: " + result.getFieldError());
-	            return "Applicant_edit";
+	        	model.addAttribute("error_adding_applicant_experience","ERROR: " + result.getFieldError());
+	            
+	        	editApplicant(applicantID,model);
+	        	
+	        	return "Applicant_edit";
+	        	
 	            }
+	        
 	        	else if(!result.hasErrors()) {
 	        		 
-	        		applicant_education_service.insertApplicantEducation(applicant, education);
+	        		applicant_experience_service.insertApplicantExperience(applicant, experience);
+	        		
+	        		model.addAttribute("alert_status", "success");
+			        model.addAttribute("success_adding_applicant_experience", "Experience successfully added!");
+	        		
+	        		editApplicant(applicantID,model);
 
 	        	}
-	        	
-		        model.addAttribute("alert_status", "success");
-		        model.addAttribute("success", "Applicant successfully added!");
+
+		        editApplicant(applicantID,model);
+		        
     	        return "Applicant_edit";
 	    }
 	    
-	    //Form submission by POST request to edit an applicant's experience in database. It also validates the user input     
-	    @RequestMapping(value = { "/edit-{applicantID}-applicant" }, method = RequestMethod.POST)
-	    public String editApplicant_education(@Valid ApplicantEducation education, BindingResult result,
-	            ModelMap model) {
+	    
+	 // This method will delete an applicant by it's ID value.     
+	    @RequestMapping(value = { "/delete_applicant_experience-{applicantID}" }, method = RequestMethod.GET)
+	    public String deleteApplicant_experience(@PathVariable String applicantID,ModelMap model) {
 	    	
+	    	String experienceTitle = "";
 	    	
-	        if (result.hasErrors()) {
+	    	System.out.println("***************************************************\n");
+	    	System.out.println(experienceTitle);
+	    	System.out.println("\n_________________________________________________\n");
+	    	System.out.println(applicantID);
+	    	System.out.println("\n***************************************************");
+	    	
+	    	applicant_experience_service.deleteApplicantExperience(applicantID, experienceTitle);
 	        
-	 
-	        	model.addAttribute("alert_status", "danger");
-	        	model.addAttribute("error_editing_applicant_education","ERROR: " + result.getFieldError());
-	            return "Applicant_edit";
-	            }
-	        	else if(!result.hasErrors()) {
-	        		
-	        		applicant_education_service.updateApplicantEducation(education);
-	        		  
-	        	}
-	        	
-		        model.addAttribute("alert_status", "success");
-		        model.addAttribute("success", "Applicant successfully updated!");
-    	        return "Applicant_edit";
+	    	model.addAttribute("alert_status", "info_edit_applicant_experiences");
+	    	model.addAttribute("success_deleting_applicant_experience", "Applicant successfully deleted!");
+	    	
+	    	 editApplicant(applicantID,model);
+	        
+	        return "Applicant_edit";
+	    	
 	    }
-	 		*/
+
+	 	
 	 
 	 
 }

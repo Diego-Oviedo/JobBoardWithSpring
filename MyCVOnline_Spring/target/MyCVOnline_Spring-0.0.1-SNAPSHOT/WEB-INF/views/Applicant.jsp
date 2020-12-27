@@ -1,105 +1,143 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+  pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Applicant | Applicant profile</title>
+<meta charset="utf-8">
+<meta name="viewport"
+  content="width=device, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<link
+  href="${pageContext.request.contextPath}/resources/CSS/styles_applicants.css"
+  rel="stylesheet" type="text/css">
+<title>Applicant | Profile</title>
 </head>
 <body>
 
-Applicant ID: 
-USERNAME:
-PASSWORD:
-FULL NAME:
-PROFESSION:
-PHONE NUMBER: 
-EMAIL:
-ADDRESS:
+
+  <div class="header">
+    <h1>My CV Online</h1>
+		<p>
+			A <b>resume-generator</b> webapp.
+		</p>
+  </div>
+
+  <div class="navbar">
+    <a href="#" class="active">Home</a> <a
+      href="${pageContext.request.contextPath}/Applicants/New-Applicant">Add New Applicant</a> <a
+      href="${pageContext.request.contextPath}/Applicants/All-Applicants">List
+      of All Applicants</a> 
+      
+
+    <div class="chip">
+      <img src="/All-Applicants_Pictures?applicantID=${applicant.applicantID}"/>
+      ${applicant.firstName} ${applicant.lastName} | ${applicant.username}
+    </div>
+  </div>
 
 
-<form:form method="POST" modelAttribute="applicant">
-        <form:input type="hidden" path="applicantID" id="applicantID"/>
-        <table>
-            <tr>
-                <td><label for="firstName">First Name: </label> </td>
-                <td><form:input path="firstName" id="firstName"/></td>
-                <td><form:errors path="firstName" cssClass="error"/></td>
-            </tr>
-            
-             <tr>
-                <td><label for="lastName">Last Name: </label> </td>
-                <td><form:input path="lastName" id="lastName"/></td>
-                <td><form:errors path="lastName" cssClass="error"/></td>
-            </tr>
+  <div class="main">
+
+    <div class="row">
+
+      <div class="aside_box_left">
           
-            <tr>
-                <td><label for="username">Username: </label> </td>
-                <td><form:input path="username" id="username"/></td>
-                <td><form:errors path="username" cssClass="error"/></td>
-            </tr>
+          <div class="aside_box">
+            <p>
+            ${applicant.firstName} ${applicant.lastName} <br>
+            <i>${applicant.phoneNumber}<br>
+            ${applicant.email}<br>
+            ${applicant.streetAddress},${applicant.postalCode} <br> 
+            ${applicant.city}, ${applicant.province},
+            ${applicant.country}.<br> 
+            ${applicant.profession}</i>
+          </p>
+
+          <h3>About Me:</h3>
+          <p>${applicant.aboutYou}</p>
+		  <br>
+		  <a href="${pageContext.request.contextPath}/Applicants/edit-${applicant.applicantID}-applicant">Edit Applicant</a>
+          </div>
+        
+          <div class="aside_box">
+              <h3>My Skills</h3>
+              <div class="fakeimg" style="height: 60px;">Image</div>
+              <br>
+              <div class="fakeimg" style="height: 60px;">Image</div>
+              <br>
+              <div class="fakeimg" style="height: 60px;">Image</div>
+           </div>
+          
+        </div>
+
+        <div class="aside_right">
+
+        <div class="aside_box">
+          <h2>Experience</h2>
+          
+				<div class="experience_module">
+				<c:forEach items="${applicant_experiences}" var="experience">
+					<h3>${experience.experienceTitle}</h3>
+					<span>${experience.companyName}</span>
+					<br>
+					<span>${experience.startDate} - ${experience.endDate}</span>
+					<p>${experience.description}</p>
+					<br><br>
+				</c:forEach>
+				</div>
+        </div>    
+        
+        <br>  
+
+       <div class="aside_box">
+          <h2>Education</h2>
+          
+				<div class="experience_module">
+				<c:forEach items="${applicant_educations}" var="education">
+					<h3>${education.educationTitle}</h3>
+					<span>${education.schoolName}</span>
+					<br>
+					<span>${education.startDate} - ${education.endDate}</span>
+					<p>${education.description}</p>
+					<br><br>
+				</c:forEach>
+				</div>
+        </div> 
+
+
+    </div>
+  </div>
+
+
+  <script>
+  
+  // Get the X buttom from the alert
+   // When the user clicks in the X of the alert, close it
+      var close = document.getElementsByClassName("closebtn");
+      var i;
+
+      for (i = 0; i < close.length; i++) {
+        close[i].onclick = function() {
+          var div = this.parentElement;
+          div.style.opacity = "0";
+          setTimeout(function() {
+            div.style.display = "none";
+          }, 600);
+        }
+      }
       
-            <tr>
-                <td><label for="phoneNumber">Phone Number: </label> </td>
-                <td><form:input path="phoneNumber" id="phoneNumber"/></td>
-                <td><form:errors path="phoneNumber" cssClass="error"/></td>
-            </tr>
-            
-             <tr>
-                <td><label for="email">E-mail: </label> </td>
-                <td><form:input path="email" id="email"/></td>
-                <td><form:errors path="email" cssClass="error"/></td>
-            </tr>
-            
-            <tr>
-                <td><label for="streetAddress">Address : </label> </td>
-                <td><form:input path="streetAddress" id="streetAddress"/></td>
-                <td><form:errors path="streetAddress" cssClass="error"/></td>
-            </tr>
-            
-            <tr>
-                <td><label for="postalCode">Postal Code: </label> </td>
-                <td><form:input path="postalCode" id="postalCode"/></td>
-                <td><form:errors path="postalCode" cssClass="error"/></td>
-            </tr>
-            
-            <tr>
-                <td><label for="city">City: </label> </td>
-                <td><form:input path="city" id="city"/></td>
-                <td><form:errors path="city" cssClass="error"/></td>
-            </tr>
-            
-            <tr>
-                <td><label for="country">Country: </label> </td>
-                <td><form:input path="country" id="country"/></td>
-                <td><form:errors path="country" cssClass="error"/></td>
-            </tr>
-            
-            <tr>
-                <td><label for="aboutYou">About you: </label> </td>
-                <td><form:input path="aboutYou" id="aboutYou"/></td>
-                <td><form:errors path="aboutYou" cssClass="error"/></td>
-            </tr>
-            
       
-            <tr>
-                <td colspan="3">
-                    <c:choose>
-                        <c:when test="${edit}">
-                            <input type="submit" value="Update"/>
-                        </c:when>
-                        <c:otherwise>
-                            <input type="submit" value="Register"/>
-                        </c:otherwise>
-                    </c:choose>
-                </td>
-            </tr>
-        </table>
-    </form:form>
-<a href="${pageContext.request.contextPath}/Applicants/All-Applicants">List of All Applicants</a>
+    // Get the modal
+      var modal = document.getElementById('id01');
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+    </script>
 
 </body>
 </html>

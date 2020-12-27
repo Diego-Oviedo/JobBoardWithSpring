@@ -9,10 +9,15 @@
 </head>
 <body>
 
-	 message : ${success}
-    <br/>
-    <br/>
-    Go back to <a href="${pageContext.request.contextPath}/Applicants/All-Applicants">List of All Applicants</a>
+	 <h2>message : ${success}</h2>
+
+	<script>
+	  setTimeout(function() {
+	      document.location = "${pageContext.request.contextPath}/Applicants/All-Applicants";
+	  }, 1000); // <-- this is the delay in milliseconds
+	</script>
+
+
 
 </body>
 </html>

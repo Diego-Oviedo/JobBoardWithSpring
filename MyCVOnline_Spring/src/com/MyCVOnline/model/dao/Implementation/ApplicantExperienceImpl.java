@@ -31,13 +31,10 @@ public class ApplicantExperienceImpl extends AbstractDAO<ApplicantExperience> im
 	@Transactional
 	public void deleteApplicantExperience(String applicantID, String experienceTitle) {
 		
-		Query query = getSession().createQuery("FROM ApplicantExperience WHERE applicant_id = :applicantID AND experience_title = :experienceTitle ");
+		Query query = getSession().createQuery("DELETE FROM ApplicantExperience WHERE applicant_id = :applicantID AND experience_title = :experienceTitle ");
 		query.setParameter("applicantID", applicantID);
 		query.setParameter("experienceTitle", experienceTitle);
-		
-		ApplicantExperience experience = (ApplicantExperience)query.uniqueResult();
-		
-		delete(experience);
+
 
 	}
 

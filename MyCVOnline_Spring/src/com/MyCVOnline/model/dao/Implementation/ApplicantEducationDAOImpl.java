@@ -31,14 +31,9 @@ public class ApplicantEducationDAOImpl extends AbstractDAO<ApplicantEducation> i
 	@Transactional
 	public void deleteApplicantEducation(String applicantID, String educationTitle) {
 		
-		Query query = getSession().createQuery("FROM ApplicantEducation WHERE applicant_id = :applicantID AND education_title = :educationTitle ");
+		Query query = getSession().createQuery("DELETE FROM ApplicantEducation WHERE applicant_id = :applicantID AND education_title = :educationTitle ");
 		query.setParameter("applicantID", applicantID);
 		query.setParameter("educationTitle", educationTitle);
-		
-		
-		ApplicantEducation education = (ApplicantEducation)query.uniqueResult();
-		
-		delete(education);
 
 	}
 

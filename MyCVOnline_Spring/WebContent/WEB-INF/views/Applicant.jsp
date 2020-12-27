@@ -9,7 +9,7 @@
 <meta name="viewport"
   content="width=device, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <link
-  href="${pageContext.request.contextPath}/resources/CSS/styles_companies.css"
+  href="${pageContext.request.contextPath}/resources/CSS/styles_applicants.css"
   rel="stylesheet" type="text/css">
 <title>Applicant | Profile</title>
 </head>
@@ -79,7 +79,7 @@
 				<div class="experience_module">
 				<c:forEach items="${applicant_experiences}" var="experience">
 					<h3>${experience.experienceTitle}</h3>
-					<samp>${experience.companyName}</samp>
+					<span>${experience.companyName}</span>
 					<br>
 					<span>${experience.startDate} - ${experience.endDate}</span>
 					<p>${experience.description}</p>
@@ -96,7 +96,7 @@
 				<div class="experience_module">
 				<c:forEach items="${applicant_educations}" var="education">
 					<h3>${education.educationTitle}</h3>
-					<samp>${education.schoolName}</samp>
+					<span>${education.schoolName}</span>
 					<br>
 					<span>${education.startDate} - ${education.endDate}</span>
 					<p>${education.description}</p>
