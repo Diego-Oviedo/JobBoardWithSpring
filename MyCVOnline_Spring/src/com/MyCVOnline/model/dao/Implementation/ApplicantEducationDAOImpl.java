@@ -34,6 +34,8 @@ public class ApplicantEducationDAOImpl extends AbstractDAO<ApplicantEducation> i
 		Query query = getSession().createQuery("DELETE FROM ApplicantEducation WHERE applicant_id = :applicantID AND education_title = :educationTitle ");
 		query.setParameter("applicantID", applicantID);
 		query.setParameter("educationTitle", educationTitle);
+		
+		query.executeUpdate();
 
 	}
 

@@ -35,7 +35,7 @@ public class ApplicantExperienceImpl extends AbstractDAO<ApplicantExperience> im
 		query.setParameter("applicantID", applicantID);
 		query.setParameter("experienceTitle", experienceTitle);
 
-
+		query.executeUpdate();
 	}
 
 	@Transactional

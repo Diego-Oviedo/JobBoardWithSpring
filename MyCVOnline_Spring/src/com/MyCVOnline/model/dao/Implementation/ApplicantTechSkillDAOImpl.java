@@ -26,7 +26,8 @@ public class ApplicantTechSkillDAOImpl extends AbstractDAO<ApplicantTechSkill> i
 		Query query = getSession().createQuery("DELETE FROM ApplicantTechSkill WHERE applicant_id = :applicantID AND skill_name = :skillName ");
 		query.setParameter("applicantID", applicantID);
 		query.setParameter("skillName", skillName);
-
+		
+		query.executeUpdate();
 		
 	}
 

@@ -46,7 +46,7 @@
 
 				<h2>EDIT APPLICANT</h2>
 
-				<div class="alert ${alert_status}">
+				<div class="alert ${alert_status_edit_applicant}">
 					<span class="closebtn"
 						onclick="this.parentElement.style.display='none';">&times;</span>
 					<strong>${success}</strong> <strong>${error_editing_applicant}</strong>
@@ -194,7 +194,7 @@
 					<div class="aside_box">
 						<h2>Experience</h2>
 						
-						<div class="alert ${alert_status}">
+						<div class="alert ${alert_status_edit_applicant_experience}">
 							<span class="closebtn"
 								onclick="this.parentElement.style.display='none';">&times;</span>
 							<strong>${success_deleting_applicant_experience}</strong> 
@@ -210,7 +210,7 @@
 								<p>${experience.description}</p>
 								<br>
 								
-									<a  class="delete_button" href="${pageContext.request.contextPath}/Applicants/delete_applicant_experience-${applicant.applicantID}?experienceTitle=${experience.experienceTitle}">Delete</a>
+									<a  class="delete_button" href="${pageContext.request.contextPath}/Applicants/delete_applicant_${experience.experienceTitle}_experience-${applicant.applicantID}">Delete</a>
 								
 								<br><br>
 							</c:forEach>
@@ -219,10 +219,11 @@
 
 					<div class="aside_form">
 					
-					<div class="alert ${alert_status}">
+					<div class="alert ${alert_status_add_applicant_experience}">
 						<span class="closebtn"
 							onclick="this.parentElement.style.display='none';">&times;</span> 
 						<strong>${error_adding_applicant_experience}</strong>
+						<strong>${success_adding_applicant_experience}</strong>
 					</div>
 				
 

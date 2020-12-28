@@ -188,7 +188,7 @@ public class ApplicantController {
 	    	//if the userame to edit already exists and is different that the previous one -> you will have to choose another oner 
 	        if(applicant_service.isApplicantUsernameAlreadyExists(applicant.getUsername()) && !applicant.getUsername().equalsIgnoreCase(applicant_service.retreiveApplicant(applicant.getApplicantID()).getUsername())){
 	        	
-	        	model.addAttribute("alert_status", "warning_edit_applicant");
+	        	model.addAttribute("alert_status_edit_applicant", "warning");
 		    	model.addAttribute("error_editing_applicant", "Username already exists");
 	            
 		    	editApplicant(applicantID,model);
@@ -198,7 +198,7 @@ public class ApplicantController {
 	    	
 	        if (result.hasErrors()) {
 	        	
-	        	model.addAttribute("alert_status", "danger_edit_applicant");
+	        	model.addAttribute("alert_status_edit_applicant", "danger");
 	        	model.addAttribute("error_editing_applicant","Error when filling fileds"); 
 	            
 	        	ArrayList<ApplicantEducation> educations = applicant_education_service.retreiveApplicantEducationsByID(applicantID);
@@ -225,7 +225,7 @@ public class ApplicantController {
 	        else if(!result.hasErrors()) {
        		 
 	        	applicant_service.updateApplicant(applicant);
-	        	model.addAttribute("alert_status", "success_edit_applicant");
+	        	model.addAttribute("alert_status_edit_applicant", "success");
 		        model.addAttribute("success", "Applicant successfully updated!");
 		        
 		        editApplicant(applicantID,model);
@@ -247,7 +247,7 @@ public class ApplicantController {
 	    	
 	    	applicant_service.deleteApplicant(applicantID);
 	        
-	    	model.addAttribute("alert_status", "info_edit_applicant");
+	    	model.addAttribute("alert_status_edit_applicant", "info");
 	    	model.addAttribute("success", "Applicant successfully deleted!");
 	    	
 	    	ArrayList<Applicant> applicants = applicant_service.retreiveApplicants();
@@ -269,7 +269,7 @@ public class ApplicantController {
 	        if (result.hasErrors()) {
 	        	
 	 
-	        	model.addAttribute("alert_status", "danger");
+	        	model.addAttribute("alert_status_add_applicant_experience", "danger");
 	        	model.addAttribute("error_adding_applicant_experience","ERROR: " + result.getFieldError());
 	            
 	        	editApplicant(applicantID,model);
@@ -282,7 +282,7 @@ public class ApplicantController {
 	        		 
 	        		applicant_experience_service.insertApplicantExperience(applicant, experience);
 	        		
-	        		model.addAttribute("alert_status", "success");
+	        		model.addAttribute("alert_status_add_applicant_experience", "success");
 			        model.addAttribute("success_adding_applicant_experience", "Experience successfully added!");
 	        		
 	        		editApplicant(applicantID,model);
@@ -296,21 +296,14 @@ public class ApplicantController {
 	    
 	    
 	 // This method will delete an applicant by it's ID value.     
-	    @RequestMapping(value = { "/delete_applicant_experience-{applicantID}" }, method = RequestMethod.GET)
-	    public String deleteApplicant_experience(@PathVariable String applicantID,ModelMap model) {
-	    	
-	    	String experienceTitle = "";
-	    	
-	    	System.out.println("***************************************************\n");
-	    	System.out.println(experienceTitle);
-	    	System.out.println("\n_________________________________________________\n");
-	    	System.out.println(applicantID);
-	    	System.out.println("\n***************************************************");
+	    @RequestMapping(value = { "/delete_applicant_{experienceTitle}_experience-{applicantID}" }, method = RequestMethod.GET)
+	    public String deleteApplicant_experience(@PathVariable String experienceTitle,@PathVariable String applicantID,ModelMap model) {
+	 
 	    	
 	    	applicant_experience_service.deleteApplicantExperience(applicantID, experienceTitle);
 	        
-	    	model.addAttribute("alert_status", "info_edit_applicant_experiences");
-	    	model.addAttribute("success_deleting_applicant_experience", "Applicant successfully deleted!");
+	    	model.addAttribute("alert_status_edit_applicant_experience", "info");
+	    	model.addAttribute("success_deleting_applicant_experience", "Experience successfully deleted!");
 	    	
 	    	 editApplicant(applicantID,model);
 	        

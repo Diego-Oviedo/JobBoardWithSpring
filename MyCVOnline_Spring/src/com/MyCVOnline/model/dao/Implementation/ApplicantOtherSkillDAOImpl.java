@@ -28,7 +28,7 @@ public class ApplicantOtherSkillDAOImpl extends AbstractDAO<ApplicantOtherSkill>
 		query.setParameter("applicantID", applicantID);
 		query.setParameter("skillName", skillName);
 
-		
+		query.executeUpdate();
 
 	}
 
