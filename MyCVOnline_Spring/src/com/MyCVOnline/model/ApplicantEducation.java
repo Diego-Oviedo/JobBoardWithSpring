@@ -47,6 +47,7 @@ public class ApplicantEducation implements Serializable{
 	@Column(name = "END_DATE")
 	private LocalDateTime endDate;
 	
+	@NotEmpty
 	@Column(name = "DESCRIPTION")
 	private String description;
 

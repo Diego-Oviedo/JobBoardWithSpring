@@ -28,9 +28,11 @@ public class ApplicantExperience implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
+	@NotEmpty
 	@Column(name = "EXPERIENCE_TITLE")
 	private String experienceTitle;
 
+	@NotEmpty
 	@Column(name = "COMPANY_NAME")
 	private String companyName;
 	
@@ -44,6 +46,7 @@ public class ApplicantExperience implements Serializable{
 	@Column(name = "END_DATE", nullable = false)
 	private LocalDateTime endDate;
 
+	@NotEmpty
 	@Column(name = "DESCRIPTION")
 	private String description;
 

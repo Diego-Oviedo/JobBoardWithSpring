@@ -8,9 +8,8 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<link
-	href="${pageContext.request.contextPath}/resources/CSS/styles_applicants.css"
-	rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/CSS/styles_applicants.css" rel="stylesheet" type="text/css">
+<script src="${pageContext.request.contextPath}/resources/JavaScript/popups.js"></script>
 <title>Applicant | Edit Profile</title>
 </head>
 <body>
@@ -25,16 +24,17 @@
 
 	<div class="navbar">
 		<a href="#" class="active">Home</a> <a
-			href="${pageContext.request.contextPath}/Applicants/New-Applicant">Add New Applicant</a> <a
+			href="${pageContext.request.contextPath}/Applicants/New-Applicant">Add
+			New Applicant</a> <a
 			href="${pageContext.request.contextPath}/Applicants/All-Applicants">List
-			of All Applicants</a> 
-			
+			of All Applicants</a>
+
 
 		<div class="chip">
-			<img src="/All-Applicants_Pictures?applicantID=${applicant.applicantID}"/>
+			<img src="/All-Applicants_Pictures?applicantID=${applicant.applicantID}" />
 			${applicant.firstName} ${applicant.lastName} | ${applicant.username}
 		</div>
-		
+
 	</div>
 
 
@@ -49,12 +49,13 @@
 				<div class="alert ${alert_status_edit_applicant}">
 					<span class="closebtn"
 						onclick="this.parentElement.style.display='none';">&times;</span>
-					<strong>${success}</strong> <strong>${error_editing_applicant}</strong>
+					<strong>${success}</strong> 
+					<strong>${error_editing_applicant}</strong>
 				</div>
 
 				<div class="aside_form">
 
-					<form:form method="POST" modelAttribute="applicant" >
+					<form:form method="POST" modelAttribute="applicant">
 
 						<div class="input">
 							<form:input path="firstName" id="firstName"
@@ -164,8 +165,7 @@
 									<button type="button"
 										onclick="document.getElementById('id01').style.display='none'"
 										class="deletebtn">
-										<a
-											href="${pageContext.request.contextPath}/Applicants/delete-${applicant.applicantID}-applicant">Delete</a>
+										<a href="${pageContext.request.contextPath}/Applicants/delete-${applicant.applicantID}-applicant">Delete</a>
 									</button>
 								</div>
 							</div>
@@ -189,11 +189,9 @@
 
 				<div class="aside_box">
 
-
-
 					<div class="aside_box">
 						<h2>Experience</h2>
-						
+
 						<div class="alert ${alert_status_edit_applicant_experience}">
 							<span class="closebtn"
 								onclick="this.parentElement.style.display='none';">&times;</span>
@@ -201,31 +199,31 @@
 							<strong>${success_adding_applicant_experience}</strong>
 						</div>
 
-						<div class="experience_module">
-							<c:forEach items="${applicant_experiences}" var="experience">
-								<h3>${experience.experienceTitle}</h3>
-								${experience.companyName}
-								<br>
-								${experience.startDate} - ${experience.endDate}
-								<p>${experience.description}</p>
-								<br>
-								
-									<a  class="delete_button" href="${pageContext.request.contextPath}/Applicants/delete_applicant_${experience.experienceTitle}_experience-${applicant.applicantID}">Delete</a>
-								
-								<br><br>
-							</c:forEach>
-						</div>
+						<c:forEach items="${applicant_experiences}" var="experience">
+							<h3>${experience.experienceTitle}</h3>
+							${experience.companyName}
+							<br>
+							${experience.startDate} - ${experience.endDate}
+							<p>${experience.description}</p>
+							<br>
+
+							<a class="delete_button"
+								href="${pageContext.request.contextPath}/Applicants/delete_applicant_${experience.experienceTitle}_experience-${applicant.applicantID}">Delete</a>
+
+							<br>
+							<br>
+						</c:forEach>
+						
 					</div>
 
 					<div class="aside_form">
-					
-					<div class="alert ${alert_status_add_applicant_experience}">
-						<span class="closebtn"
-							onclick="this.parentElement.style.display='none';">&times;</span> 
-						<strong>${error_adding_applicant_experience}</strong>
-						<strong>${success_adding_applicant_experience}</strong>
-					</div>
-				
+
+						<div class="alert ${alert_status_add_applicant_experience}">
+							<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+							<strong>${error_adding_applicant_experience}</strong> 
+							<strong>${success_adding_applicant_experience}</strong>
+						</div>
+
 
 						<form:form method="POST" modelAttribute="experience"
 							action="add_applicant_experience-${applicant.applicantID}">
@@ -266,39 +264,96 @@
 						</form:form>
 
 					</div>
+					
 				</div>
+				
+				
+				<div class="aside_box">
+
+					<div class="aside_box">
+						<h2>Education</h2>
+
+						<div class="alert ${alert_status_edit_applicant_education}">
+							<span class="closebtn"
+								onclick="this.parentElement.style.display='none';">&times;</span>
+							<strong>${success_deleting_applicant_education}</strong> 
+							<strong>${success_adding_applicant_education}</strong>
+						</div>
+
+						<c:forEach items="${applicant_educations}" var="education">
+							<h3>${education.educationTitle}</h3>
+							${education.schoolName}
+							<br>
+							${education.startDate} - ${education.endDate}
+							<p>${education.description}</p>
+							<br>
+
+							<a class="delete_button"
+								href="${pageContext.request.contextPath}/Applicants/delete_applicant_${education.educationTitle}_education-${applicant.applicantID}">Delete</a>
+
+							<br>
+							<br>
+						</c:forEach>
+						
+					</div>
+
+					<div class="aside_form">
+
+						<div class="alert ${alert_status_add_applicant_education}">
+							<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+							<strong>${error_adding_applicant_education}</strong> 
+							<strong>${success_adding_applicant_education}</strong>
+						</div>
+
+
+						<form:form method="POST" modelAttribute="education"
+							action="add_applicant_education-${applicant.applicantID}">
+
+							<div class="input">
+								<form:input path="educationTitle" placeholder="Title" />
+								<br>
+								<form:errors path="educationTitle" class="error" />
+							</div>
+
+							<div class="input">
+								<form:input path="schoolName" placeholder="School Name" />
+								<br>
+								<form:errors path="schoolName" class="error" />
+							</div>
+
+							<div class="input">
+								<form:input type="date" path="startDate"
+									placeholder="Start Date" />
+								<br>
+								<form:errors path="startDate" class="error" />
+							</div>
+
+							<div class="input">
+								<form:input type="date" path="endDate" placeholder="End date" />
+								<br>
+								<form:errors path="endDate" class="error" />
+							</div>
+
+							<div class="input">
+								<form:input path="description" placeholder="Description" />
+								<br>
+								<form:errors path="description" class="error" />
+							</div>
+
+							<input class="update_button" type="submit" />
+
+						</form:form>
+
+					</div>
+					
+				</div>
+				
 			</div>
 
 		</div>
 	</div>
 
 
-	<script>
-		// Get the X buttom from the alert
-		// When the user clicks in the X of the alert, close it
-		var close = document.getElementsByClassName("closebtn");
-		var i;
-
-		for (i = 0; i < close.length; i++) {
-			close[i].onclick = function() {
-				var div = this.parentElement;
-				div.style.opacity = "0";
-				setTimeout(function() {
-					div.style.display = "none";
-				}, 600);
-			}
-		}
-
-		// Get the modal
-		var modal = document.getElementById('id01');
-
-		// When the user clicks anywhere outside of the modal, close it
-		window.onclick = function(event) {
-			if (event.target == modal) {
-				modal.style.display = "none";
-			}
-		}
-	</script>
 
 </body>
 </html>

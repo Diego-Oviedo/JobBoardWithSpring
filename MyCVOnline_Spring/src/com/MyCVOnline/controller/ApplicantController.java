@@ -16,11 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
@@ -270,7 +269,7 @@ public class ApplicantController {
 	        	
 	 
 	        	model.addAttribute("alert_status_add_applicant_experience", "danger");
-	        	model.addAttribute("error_adding_applicant_experience","ERROR: " + result.getFieldError());
+	        	model.addAttribute("error_adding_applicant_experience","Error when filling fileds");
 	            
 	        	editApplicant(applicantID,model);
 	        	
@@ -311,7 +310,58 @@ public class ApplicantController {
 	    	
 	    }
 
-	 	
+		  //Form submission by POST request to save an applicant's education in database. It also validates the user input     
+		    @RequestMapping(value = { "/add_applicant_education-{applicantID}" }, method = RequestMethod.POST)
+		    public String saveApplicant_education(@PathVariable String applicantID ,@Valid ApplicantEducation education, BindingResult result,
+		            ModelMap model) {
+		    	
+		    		Applicant applicant = applicant_service.retreiveApplicant(applicantID);
+		    	
+		    	
+		        if (result.hasErrors()) {
+		        	
+		 
+		        	model.addAttribute("alert_status_add_applicant_education", "danger");
+		        	model.addAttribute("error_adding_applicant_education","Error when filling fileds");
+		            
+		        	editApplicant(applicantID,model);
+		        	
+		        	return "Applicant_edit";
+		        	
+		            }
+		        
+		        	else if(!result.hasErrors()) {
+		        		 
+		        		applicant_education_service.insertApplicantEducation(applicant, education);
+		        		
+		        		model.addAttribute("alert_status_add_applicant_education", "success");
+				        model.addAttribute("success_adding_applicant_education", "Education successfully added!");
+		        		
+		        		editApplicant(applicantID,model);
+	
+		        	}
+	
+			        editApplicant(applicantID,model);
+			        
+	    	        return "Applicant_edit";
+		    }
+	    
+	    
+		 // This method will delete an applicant by it's ID value.     
+		    @RequestMapping(value = { "/delete_applicant_{educationTitle}_education-{applicantID}" }, method = RequestMethod.GET)
+		    public String deleteApplicant_education(@PathVariable String educationTitle,@PathVariable String applicantID,ModelMap model) {
+		 
+		    	
+		    	applicant_education_service.deleteApplicantEducation(applicantID, educationTitle);
+		        
+		    	model.addAttribute("alert_status_edit_applicant_education", "info");
+		    	model.addAttribute("success_deleting_applicant_education", "Education successfully deleted!");
+		    	
+		    	 editApplicant(applicantID,model);
+		        
+		        return "Applicant_edit";
+		    	
+		    }
 	 
 	 
 }

@@ -72,19 +72,5 @@ Applicants:  <br>
 	<a href="${pageContext.request.contextPath}/Applicants/New-Applicant">Add New Applicant</a> 
 
 
-		<script>
-			var close = document.getElementsByClassName("closebtn");
-			var i;
-
-			for (i = 0; i < close.length; i++) {
-				close[i].onclick = function() {
-					var div = this.parentElement;
-					div.style.opacity = "0";
-					setTimeout(function() {
-						div.style.display = "none";
-					}, 600);
-				}
-			}
-		</script>
 </body>
 </html>
